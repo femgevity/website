@@ -1,0 +1,2144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FemGevity Health | Precision Women's Health for Collaborative Care</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #023436;
+            --primary-light: #045a5e;
+            --primary-dark: #011f20;
+            --accent: #d4a574;
+            --accent-light: #e8c9a8;
+            --cream: #faf8f5;
+            --cream-dark: #f0ebe3;
+            --text: #1a1a1a;
+            --text-light: #5a5a5a;
+            --white: #ffffff;
+            --gradient-primary: linear-gradient(135deg, #023436 0%, #045a5e 50%, #034547 100%);
+            --gradient-accent: linear-gradient(135deg, #d4a574 0%, #c49464 100%);
+            --shadow-soft: 0 4px 24px rgba(2, 52, 54, 0.08);
+            --shadow-medium: 0 8px 40px rgba(2, 52, 54, 0.12);
+            --shadow-strong: 0 16px 64px rgba(2, 52, 54, 0.16);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 500;
+            line-height: 1.2;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.25rem 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-soft);
+            padding: 0.75rem 4%;
+        }
+
+        .nav-logo svg {
+            height: 36px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-logo:hover svg {
+            transform: scale(1.02);
+        }
+
+        .nav.scrolled .nav-logo svg path {
+            fill: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            transition: opacity 0.3s ease;
+            position: relative;
+        }
+
+        .nav.scrolled .nav-link {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: currentColor;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 0.75rem 1.75rem;
+            background: var(--white);
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 100px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav.scrolled .nav-cta {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .mobile-menu-btn span {
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .nav.scrolled .mobile-menu-btn span {
+            background: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: var(--gradient-primary);
+        }
+
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.6;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(2, 52, 54, 0.3) 0%,
+                rgba(2, 52, 54, 0.1) 50%,
+                rgba(2, 52, 54, 0.4) 100%
+            );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 8rem 6% 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--accent-light);
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 span {
+            color: var(--accent-light);
+        }
+
+        .hero-description {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 2.5rem;
+            max-width: 540px;
+            line-height: 1.7;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 100px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--primary);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .hero-visual {
+            animation: fadeInUp 1s ease-out 0.4s both;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 1.75rem;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Trust Strip */
+        .trust-strip {
+            background: var(--white);
+            padding: 2rem 6%;
+            border-bottom: 1px solid rgba(2, 52, 54, 0.06);
+        }
+
+        .trust-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .trust-icon {
+            width: 20px;
+            height: 20px;
+            fill: var(--primary);
+            opacity: 0.8;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 6%;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--primary);
+            background: rgba(2, 52, 54, 0.06);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            margin-bottom: 1.25rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Problem Section */
+        .problem-section {
+            background: var(--cream-dark);
+        }
+
+        .problem-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .problem-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .problem-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .problem-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .problem-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(2, 52, 54, 0.06);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .problem-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--primary);
+        }
+
+        .problem-card h3 {
+            font-size: 1.35rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .problem-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.65;
+        }
+
+        /* Solution Section */
+        .solution-section {
+            background: var(--white);
+        }
+
+        .solution-visual {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .solution-diagram {
+            background: var(--gradient-primary);
+            border-radius: 32px;
+            padding: 4rem;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solution-diagram::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .solution-side {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .solution-pill {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 100px;
+            padding: 1rem 1.5rem;
+            color: var(--white);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .solution-pill:hover {
+            background: rgba(255, 255, 255, 0.18);
+            transform: scale(1.02);
+        }
+
+        .solution-center {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .solution-logo {
+            width: 120px;
+            height: 120px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .solution-logo svg {
+            width: 80px;
+            height: auto;
+        }
+
+        .solution-center h3 {
+            color: var(--white);
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .solution-center p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* How It Works */
+        .how-section {
+            background: var(--cream);
+        }
+
+        .how-steps {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+            position: relative;
+        }
+
+        .how-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0.2;
+        }
+
+        .how-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 56px;
+            height: 56px;
+            background: var(--white);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--primary);
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .how-step:hover .step-number {
+            background: var(--primary);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        .how-step h4 {
+            font-size: 1.1rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .how-step p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        /* Partners Section */
+        .partners-section {
+            background: var(--white);
+        }
+
+        .partners-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .partner-card {
+            background: var(--cream);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .partner-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 0;
+            background: var(--gradient-primary);
+            transition: height 0.4s ease;
+            z-index: 0;
+        }
+
+        .partner-card:hover::after {
+            height: 100%;
+        }
+
+        .partner-card > * {
+            position: relative;
+            z-index: 1;
+            transition: color 0.4s ease;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .partner-card:hover h4,
+        .partner-card:hover p {
+            color: var(--white);
+        }
+
+        .partner-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--white);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .partner-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--primary);
+        }
+
+        .partner-card h4 {
+            font-size: 1.2rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .partner-card p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Value Section */
+        .value-section {
+            background: var(--cream-dark);
+        }
+
+        .value-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .value-column {
+            background: var(--white);
+            border-radius: 32px;
+            padding: 3rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .value-column-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(2, 52, 54, 0.08);
+        }
+
+        .value-column-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-primary);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .value-column-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--white);
+        }
+
+        .value-column-header h3 {
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+        }
+
+        .value-list {
+            list-style: none;
+        }
+
+        .value-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(2, 52, 54, 0.04);
+        }
+
+        .value-list li:last-child {
+            border-bottom: none;
+        }
+
+        .value-check {
+            width: 24px;
+            height: 24px;
+            background: rgba(2, 52, 54, 0.06);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .value-check svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--primary);
+        }
+
+        .value-list li span {
+            color: var(--text);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Science Section */
+        .science-section {
+            background: var(--primary-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .science-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(212, 165, 116, 0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .science-section .section-tag {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--accent-light);
+        }
+
+        .science-section .section-title {
+            color: var(--white);
+        }
+
+        .science-section .section-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .science-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .science-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .science-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-4px);
+        }
+
+        .science-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--gradient-accent);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+        }
+
+        .science-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--white);
+        }
+
+        .science-card h4 {
+            color: var(--white);
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .science-card p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--cream);
+            padding: 8rem 6%;
+        }
+
+        .cta-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .cta-container h2 {
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            color: var(--primary-dark);
+            margin-bottom: 1.25rem;
+        }
+
+        .cta-container p {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-dark {
+            background: var(--gradient-primary);
+            color: var(--white);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-dark:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 1.5px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-dark);
+            padding: 4rem 6% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-top: 1.5rem;
+            max-width: 300px;
+        }
+
+        .footer-column h5 {
+            color: var(--white);
+            font-size: 1rem;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.85rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .footer-social svg {
+            width: 18px;
+            height: 18px;
+            fill: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--primary-dark);
+            z-index: 999;
+            padding: 6rem 2rem 2rem;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .mobile-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text {
+                order: 1;
+            }
+
+            .hero-visual {
+                order: 2;
+            }
+
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-ctas {
+                justify-content: center;
+            }
+
+            .problem-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .solution-diagram {
+                grid-template-columns: 1fr;
+                padding: 3rem 2rem;
+            }
+
+            .solution-side {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .how-steps {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .how-steps::before {
+                display: none;
+            }
+
+            .partners-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .science-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            section {
+                padding: 4rem 5%;
+            }
+
+            .hero-content {
+                padding: 7rem 5% 3rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .stat-card {
+                padding: 1.25rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .problem-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .how-steps {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .how-step:last-child {
+                grid-column: span 2;
+            }
+
+            .value-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-brand p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .trust-content {
+                gap: 1.5rem;
+            }
+
+            .trust-item {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .btn {
+                padding: 0.9rem 1.5rem;
+                font-size: 0.9rem;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero-ctas {
+                flex-direction: column;
+            }
+
+            .how-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .how-step:last-child {
+                grid-column: span 1;
+            }
+
+            .partners-grid,
+            .science-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .solution-pill {
+                width: 100%;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* WebGPU Fallback Canvas Animation */
+        .canvas-fallback {
+            animation: gradientShift 10s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <a href="#" class="nav-logo">
+            <svg width="195" height="40" viewBox="0 0 195 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.46535 23.0393V28.0951C7.46535 28.1976 7.38284 28.2812 7.27993 28.2812H4.44763C4.34471 28.2812 4.26221 28.1976 4.26221 28.0951V13.6593C4.26221 13.5568 4.34471 13.474 4.44763 13.474H18.8881C18.9902 13.474 19.0727 13.5568 19.0727 13.6593V16.1189C19.0727 16.2222 18.9902 16.305 18.8881 16.305H7.67968C7.57762 16.305 7.49512 16.3887 7.49512 16.4911V20.0427C7.49512 20.1451 7.57762 20.228 7.67968 20.228H16.8009C16.9038 20.228 16.9863 20.3116 16.9863 20.4141V22.6679C16.9863 22.7704 16.9038 22.8532 16.8009 22.8532H7.65076C7.54785 22.8532 7.46535 22.9369 7.46535 23.0393Z" fill="#ffffff"/>
+                <path d="M25.2983 28.0951V13.6602C25.2983 13.5568 25.3808 13.474 25.4838 13.474H40.0119C40.1148 13.474 40.1973 13.5568 40.1973 13.6602V15.8543C40.1973 15.9567 40.1148 16.0395 40.0119 16.0395H28.6869C28.584 16.0395 28.5015 16.1232 28.5015 16.2256V19.4528C28.5015 19.5552 28.584 19.6389 28.6869 19.6389H37.8957C37.9986 19.6389 38.0811 19.7217 38.0811 19.8241V21.7826C38.0811 21.8851 37.9986 21.9687 37.8957 21.9687H28.6869C28.584 21.9687 28.5015 22.0515 28.5015 22.1548V25.5587C28.5015 25.6611 28.584 25.7439 28.6869 25.7439H40.0119C40.1148 25.7439 40.1973 25.8276 40.1973 25.9301V28.0951C40.1973 28.1976 40.1148 28.2812 40.0119 28.2812H25.4838C25.3808 28.2812 25.2983 28.1976 25.2983 28.0951Z" fill="#ffffff"/>
+                <path d="M68.005 28.1627L64.7942 19.867C64.7414 19.7304 64.5586 19.7065 64.4718 19.8251L58.2688 28.3702C58.194 28.4718 58.0426 28.4718 57.9686 28.3693L51.7945 19.826C51.7077 19.7073 51.5249 19.7312 51.4713 19.8678L48.2613 28.1627C48.2333 28.2345 48.1652 28.2814 48.0887 28.2814H45.1373C45.0063 28.2814 44.917 28.1491 44.9646 28.027L50.6454 13.5596C50.6998 13.4221 50.8853 13.3999 50.9695 13.5212L57.9669 23.5517C58.0409 23.6567 58.1965 23.6567 58.2705 23.5517L65.2968 13.5203C65.381 13.3991 65.5665 13.4213 65.62 13.5596L71.3008 28.027C71.3493 28.1491 71.26 28.2814 71.129 28.2814H68.1776C68.1011 28.2814 68.033 28.2345 68.005 28.1627Z" fill="#ffffff"/>
+                <path d="M100.382 28.0951V13.6602C100.382 13.5568 100.464 13.474 100.567 13.474H115.095C115.197 13.474 115.281 13.5568 115.281 13.6602V15.8543C115.281 15.9567 115.197 16.0395 115.095 16.0395H103.77C103.667 16.0395 103.585 16.1232 103.585 16.2256V19.4528C103.585 19.5552 103.667 19.6389 103.77 19.6389H112.979C113.082 19.6389 113.165 19.7217 113.165 19.8241V21.7826C113.165 21.8851 113.082 21.9687 112.979 21.9687H103.77C103.667 21.9687 103.585 22.0515 103.585 22.1548V25.5587C103.585 25.6611 103.667 25.7439 103.77 25.7439H115.095C115.197 25.7439 115.281 25.8276 115.281 25.9301V28.0951C115.281 28.1976 115.197 28.2812 115.095 28.2812H100.567C100.464 28.2812 100.382 28.1976 100.382 28.0951Z" fill="#ffffff"/>
+                <path d="M119.297 13.4743H122.64C122.704 13.4743 122.764 13.5076 122.798 13.5631L128.728 23.247C128.801 23.3648 128.971 23.3657 129.043 23.2479L135.061 13.5622C135.095 13.5076 135.153 13.4743 135.218 13.4743H138.531C138.679 13.4743 138.767 13.6391 138.686 13.7628L129.04 28.343C128.967 28.454 128.804 28.4531 128.731 28.3421L119.142 13.7628C119.061 13.6391 119.15 13.4743 119.297 13.4743Z" fill="#ffffff"/>
+                <path d="M143.548 28.0951V13.6602C143.548 13.5568 143.63 13.474 143.733 13.474H146.566C146.668 13.474 146.751 13.5568 146.751 13.6602V28.0951C146.751 28.1976 146.668 28.2812 146.566 28.2812H143.733C143.63 28.2812 143.548 28.1976 143.548 28.0951Z" fill="#ffffff"/>
+                <path d="M158.796 28.0951V16.4322C158.796 16.3298 158.714 16.247 158.611 16.247H152.281C152.179 16.247 152.097 16.1633 152.097 16.0609V13.6602C152.097 13.5568 152.179 13.474 152.281 13.474H168.515C168.617 13.474 168.699 13.5568 168.699 13.6602V16.0609C168.699 16.1633 168.617 16.247 168.515 16.247H162.185C162.082 16.247 162 16.3298 162 16.4322V28.0951C162 28.1976 161.916 28.2812 161.814 28.2812H158.982C158.879 28.2812 158.796 28.1976 158.796 28.0951Z" fill="#ffffff"/>
+                <path d="M179.842 28.0951V22.9215C179.842 22.8779 179.827 22.8353 179.798 22.802L172.195 13.7797C172.094 13.6593 172.179 13.474 172.337 13.474H175.819C175.873 13.474 175.925 13.4979 175.961 13.5406L181.316 19.9693C181.39 20.0581 181.527 20.0581 181.601 19.9693L186.957 13.5406C186.992 13.4979 187.045 13.474 187.099 13.474H190.552C190.71 13.474 190.796 13.6584 190.694 13.7797L183.119 22.802C183.091 22.8353 183.075 22.8779 183.075 22.9215V28.0951C183.075 28.1976 182.992 28.2812 182.89 28.2812H180.028C179.925 28.2812 179.842 28.1976 179.842 28.0951Z" fill="#ffffff"/>
+                <path d="M89.3714 22.292C89.3714 22.292 90.5613 23.4215 91.3328 25.0351C91.2681 24.8737 90.5613 22.905 89.3714 21.4852V19.6454H84.9988C86.6387 20.1944 88.1177 21.1301 89.3714 22.292ZM93.9371 13.7401V14.2558H89.3714V9.64135C89.3714 8.41453 88.8569 7.28503 88.0854 6.47825C87.2817 5.67147 86.1564 5.1874 84.9342 5.1874C82.4914 5.1874 80.4977 7.18856 80.4977 9.64135V30.3923C80.4977 32.8451 82.4914 34.8462 84.9342 34.8462C87.3778 34.8462 89.3714 32.8451 89.3714 30.3923V23.1953C87.7962 21.5501 85.7388 20.3557 83.3913 19.9041L82.2337 19.6454V19.0324H93.9371V26.4233C93.9371 28.9076 92.908 31.1666 91.3005 32.8126C89.6606 34.4262 87.4101 35.4268 84.9342 35.4268C79.9832 35.4268 75.9644 31.3929 75.9644 26.4233V13.5788C75.9644 11.0936 76.9612 8.83371 78.601 7.221C80.2086 5.57414 82.4591 4.57442 84.9665 4.57442C89.9498 4.57442 93.9371 8.73724 93.9371 13.7401Z" fill="#ffffff"/>
+            </svg>
+        </a>
+        <div class="nav-links">
+            <a href="#solution" class="nav-link">Our Solution</a>
+            <a href="#partners" class="nav-link">Partners</a>
+            <a href="#science" class="nav-link">Science</a>
+            <a href="#value" class="nav-link">Value</a>
+            <a href="#contact" class="nav-cta">Partner With Us</a>
+        </div>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-close" onclick="toggleMobileMenu()">×</button>
+        <a href="#solution" onclick="toggleMobileMenu()">Our Solution</a>
+        <a href="#partners" onclick="toggleMobileMenu()">Partners</a>
+        <a href="#science" onclick="toggleMobileMenu()">Science</a>
+        <a href="#value" onclick="toggleMobileMenu()">Value</a>
+        <a href="#contact" onclick="toggleMobileMenu()">Partner With Us</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">Collaborative Care Platform</div>
+                <h1>Precision Women's Health, <span>Built for Partnership</span></h1>
+                <p class="hero-description">FemGevity integrates evidence-based diagnostics and longitudinal care into existing health systems—improving outcomes while expanding clinical capacity.</p>
+                <div class="hero-ctas">
+                    <a href="#contact" class="btn btn-primary">
+                        Explore Partnership
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="#solution" class="btn btn-secondary">See the Care Model</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Biomarkers Analyzed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">5.0★</div>
+                        <div class="stat-label">Patient Rating</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">40%</div>
+                        <div class="stat-label">Reduced Review Cycles</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">EHR</div>
+                        <div class="stat-label">Athena Compatible</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Strip -->
+    <div class="trust-strip">
+        <div class="trust-content">
+            <div class="trust-item">
+                <svg class="trust-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                EHR-Compatible
+            </div>
+            <div class="trust-item">
+                <svg class="trust-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                Evidence-Based Protocols
+            </div>
+            <div class="trust-item">
+                <svg class="trust-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                Insurance-Aware Pathways
+            </div>
+            <div class="trust-item">
+                <svg class="trust-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                Harvard & Johns Hopkins Trained
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem Section -->
+    <section class="problem-section">
+        <div class="section-header">
+            <span class="section-tag">The Challenge</span>
+            <h2 class="section-title">Women's Health is Fragmented. Outcomes Suffer.</h2>
+            <p class="section-subtitle">Current care models create gaps that impact patients and strain clinical resources.</p>
+        </div>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="problem-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg>
+                </div>
+                <h3>Disconnected Specialty Care</h3>
+                <p>Fertility, hormones, and longevity are treated in silos, creating fragmented patient journeys and missed opportunities for comprehensive care.</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <h3>Reactive vs. Longitudinal Care</h3>
+                <p>Episodic treatment models miss early intervention windows. Proactive, precision-based care delivers better outcomes at lower long-term costs.</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+                </div>
+                <h3>Missed Revenue & Unmanaged Risk</h3>
+                <p>Traditional models leave reimbursable services on the table while failing to address preventable escalations and downstream costs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution-section" id="solution">
+        <div class="section-header">
+            <span class="section-tag">The FemGevity Approach</span>
+            <h2 class="section-title">Extension, Not Replacement</h2>
+            <p class="section-subtitle">We integrate precision diagnostics and collaborative care pathways into your existing ecosystem.</p>
+        </div>
+        <div class="solution-visual">
+            <div class="solution-diagram">
+                <div class="solution-side">
+                    <div class="solution-pill">OB/GYN</div>
+                    <div class="solution-pill">Primary Care</div>
+                    <div class="solution-pill">Fertility Centers</div>
+                </div>
+                <div class="solution-center">
+                    <div class="solution-logo">
+                        <svg width="80" height="32" viewBox="0 0 195 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.46535 23.0393V28.0951C7.46535 28.1976 7.38284 28.2812 7.27993 28.2812H4.44763C4.34471 28.2812 4.26221 28.1976 4.26221 28.0951V13.6593C4.26221 13.5568 4.34471 13.474 4.44763 13.474H18.8881C18.9902 13.474 19.0727 13.5568 19.0727 13.6593V16.1189C19.0727 16.2222 18.9902 16.305 18.8881 16.305H7.67968C7.57762 16.305 7.49512 16.3887 7.49512 16.4911V20.0427C7.49512 20.1451 7.57762 20.228 7.67968 20.228H16.8009C16.9038 20.228 16.9863 20.3116 16.9863 20.4141V22.6679C16.9863 22.7704 16.9038 22.8532 16.8009 22.8532H7.65076C7.54785 22.8532 7.46535 22.9369 7.46535 23.0393Z" fill="#023436"/>
+                            <path d="M25.2983 28.0951V13.6602C25.2983 13.5568 25.3808 13.474 25.4838 13.474H40.0119C40.1148 13.474 40.1973 13.5568 40.1973 13.6602V15.8543C40.1973 15.9567 40.1148 16.0395 40.0119 16.0395H28.6869C28.584 16.0395 28.5015 16.1232 28.5015 16.2256V19.4528C28.5015 19.5552 28.584 19.6389 28.6869 19.6389H37.8957C37.9986 19.6389 38.0811 19.7217 38.0811 19.8241V21.7826C38.0811 21.8851 37.9986 21.9687 37.8957 21.9687H28.6869C28.584 21.9687 28.5015 22.0515 28.5015 22.1548V25.5587C28.5015 25.6611 28.584 25.7439 28.6869 25.7439H40.0119C40.1148 25.7439 40.1973 25.8276 40.1973 25.9301V28.0951C40.1973 28.1976 40.1148 28.2812 40.0119 28.2812H25.4838C25.3808 28.2812 25.2983 28.1976 25.2983 28.0951Z" fill="#023436"/>
+                            <path d="M68.005 28.1627L64.7942 19.867C64.7414 19.7304 64.5586 19.7065 64.4718 19.8251L58.2688 28.3702C58.194 28.4718 58.0426 28.4718 57.9686 28.3693L51.7945 19.826C51.7077 19.7073 51.5249 19.7312 51.4713 19.8678L48.2613 28.1627C48.2333 28.2345 48.1652 28.2814 48.0887 28.2814H45.1373C45.0063 28.2814 44.917 28.1491 44.9646 28.027L50.6454 13.5596C50.6998 13.4221 50.8853 13.3999 50.9695 13.5212L57.9669 23.5517C58.0409 23.6567 58.1965 23.6567 58.2705 23.5517L65.2968 13.5203C65.381 13.3991 65.5665 13.4213 65.62 13.5596L71.3008 28.027C71.3493 28.1491 71.26 28.2814 71.129 28.2814H68.1776C68.1011 28.2814 68.033 28.2345 68.005 28.1627Z" fill="#023436"/>
+                            <path d="M89.3714 22.292C89.3714 22.292 90.5613 23.4215 91.3328 25.0351C91.2681 24.8737 90.5613 22.905 89.3714 21.4852V19.6454H84.9988C86.6387 20.1944 88.1177 21.1301 89.3714 22.292ZM93.9371 13.7401V14.2558H89.3714V9.64135C89.3714 8.41453 88.8569 7.28503 88.0854 6.47825C87.2817 5.67147 86.1564 5.1874 84.9342 5.1874C82.4914 5.1874 80.4977 7.18856 80.4977 9.64135V30.3923C80.4977 32.8451 82.4914 34.8462 84.9342 34.8462C87.3778 34.8462 89.3714 32.8451 89.3714 30.3923V23.1953C87.7962 21.5501 85.7388 20.3557 83.3913 19.9041L82.2337 19.6454V19.0324H93.9371V26.4233C93.9371 28.9076 92.908 31.1666 91.3005 32.8126C89.6606 34.4262 87.4101 35.4268 84.9342 35.4268C79.9832 35.4268 75.9644 31.3929 75.9644 26.4233V13.5788C75.9644 11.0936 76.9612 8.83371 78.601 7.221C80.2086 5.57414 82.4591 4.57442 84.9665 4.57442C89.9498 4.57442 93.9371 8.73724 93.9371 13.7401Z" fill="#023436"/>
+                        </svg>
+                    </div>
+                    <h3>Collaborative Care Hub</h3>
+                    <p>Precision diagnostics, clinical protocols, and shared care pathways—seamlessly integrated with your infrastructure.</p>
+                </div>
+                <div class="solution-side">
+                    <div class="solution-pill">Payers</div>
+                    <div class="solution-pill">Employers</div>
+                    <div class="solution-pill">Specialty Referrals</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-section">
+        <div class="section-header">
+            <span class="section-tag">Care Model</span>
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">A precision-driven approach designed for operational excellence.</p>
+        </div>
+        <div class="how-steps">
+            <div class="how-step">
+                <div class="step-number">1</div>
+                <h4>Precision Diagnostics</h4>
+                <p>Hormones, genomics, inflammation & metabolism testing</p>
+            </div>
+            <div class="how-step">
+                <div class="step-number">2</div>
+                <h4>Clinician-Led Interpretation</h4>
+                <p>Expert analysis with evidence-based protocols</p>
+            </div>
+            <div class="how-step">
+                <div class="step-number">3</div>
+                <h4>Longitudinal Care Plans</h4>
+                <p>Personalized pathways, not one-off visits</p>
+            </div>
+            <div class="how-step">
+                <div class="step-number">4</div>
+                <h4>Shared Data Continuity</h4>
+                <p>EHR-compatible outcomes tracking</p>
+            </div>
+            <div class="how-step">
+                <div class="step-number">5</div>
+                <h4>Coverage-Aware Execution</h4>
+                <p>Insurance-aligned care delivery</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="partners-section" id="partners">
+        <div class="section-header">
+            <span class="section-tag">Who We Serve</span>
+            <h2 class="section-title">Built for Healthcare Leaders</h2>
+            <p class="section-subtitle">Partnerships designed to expand capacity and improve outcomes.</p>
+        </div>
+        <div class="partners-grid">
+            <div class="partner-card">
+                <div class="partner-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <h4>Health Systems & Medical Groups</h4>
+                <p>Expand service lines and clinical capacity without infrastructure burden.</p>
+            </div>
+            <div class="partner-card">
+                <div class="partner-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg>
+                </div>
+                <h4>OB/GYN & PCP Practices</h4>
+                <p>Enhance women's health offerings with precision medicine capabilities.</p>
+            </div>
+            <div class="partner-card">
+                <div class="partner-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                </div>
+                <h4>Fertility & Women's Health Centers</h4>
+                <p>Add hormonal and longevity pathways to comprehensive care journeys.</p>
+            </div>
+            <div class="partner-card">
+                <div class="partner-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+                </div>
+                <h4>Employers & Payers</h4>
+                <p>Reduce long-term risk while delivering measurable clinical value.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Section -->
+    <section class="value-section" id="value">
+        <div class="section-header">
+            <span class="section-tag">Partnership Value</span>
+            <h2 class="section-title">Clinical Excellence Meets Business Performance</h2>
+            <p class="section-subtitle">Outcomes that matter for CMOs and CFOs alike.</p>
+        </div>
+        <div class="value-grid">
+            <div class="value-column">
+                <div class="value-column-header">
+                    <div class="value-column-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    </div>
+                    <h3>Clinical Outcomes</h3>
+                </div>
+                <ul class="value-list">
+                    <li>
+                        <span class="value-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                        <span>Improved fertility & hormone optimization outcomes</span>
+                    </li>
+                    <li>
+                        <span class="value-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                        <span>Earlier risk identification through precision diagnostics</span>
+                    </li>
+                    <li>
+                        <span class="value-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                        <span>Reduced downstream escalation and complications</span>
+                    </li>
+                    <li>
+                        <span class="value-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                        <span>Evidence-based, clinician-led care protocols</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="value-column">
+                <div class="value-column-header">
+                    <div class="value-column-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+                    </div>
+                    <h3>Business Outcomes</h3>
+                </div>
+                <ul class="value-list">
+                    <li>
+                        <span class="value-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                        <span>Expanded service lines with new revenue streams</span>
+                    </li>
+                    <li>
+                        <span class="value-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                        <span>New reimbursable pathways and coverage optimization</span>
+                    </li>
+                    <li>
+                        <span class="value-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                        <span>Increased lifetime patient value and retention</span>
+                    </li>
+                    <li>
+                        <span class="value-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                        <span>Reduced clinician burden with collaborative support</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Science Section -->
+    <section class="science-section" id="science">
+        <div class="section-header">
+            <span class="section-tag">Precision Medicine</span>
+            <h2 class="section-title">Science-Forward Care</h2>
+            <p class="section-subtitle">Grounded in evidence. Powered by precision.</p>
+        </div>
+        <div class="science-grid">
+            <div class="science-card">
+                <div class="science-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83M16.62 12l-5.74 9.94"/></svg>
+                </div>
+                <h4>Genomics-Informed</h4>
+                <p>Personalized protocols based on genetic insights</p>
+            </div>
+            <div class="science-card">
+                <div class="science-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                </div>
+                <h4>100+ Biomarkers</h4>
+                <p>Comprehensive hormone & metabolic panels</p>
+            </div>
+            <div class="science-card">
+                <div class="science-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+                </div>
+                <h4>Longitudinal Data</h4>
+                <p>Continuous tracking for proactive intervention</p>
+            </div>
+            <div class="science-card">
+                <div class="science-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h4>Evidence-Based</h4>
+                <p>Peer-reviewed protocols and clinical validation</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="cta-container">
+            <h2>Ready to Transform Women's Health Care?</h2>
+            <p>Let's discuss how FemGevity can expand your clinical capacity while improving patient outcomes.</p>
+            <div class="cta-buttons">
+                <a href="mailto:partnerships@femgevityhealth.com" class="btn btn-dark">
+                    Explore Partnership
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a href="#solution" class="btn btn-outline">Discuss Clinical Integration</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <svg width="160" height="32" viewBox="0 0 195 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.46535 23.0393V28.0951C7.46535 28.1976 7.38284 28.2812 7.27993 28.2812H4.44763C4.34471 28.2812 4.26221 28.1976 4.26221 28.0951V13.6593C4.26221 13.5568 4.34471 13.474 4.44763 13.474H18.8881C18.9902 13.474 19.0727 13.5568 19.0727 13.6593V16.1189C19.0727 16.2222 18.9902 16.305 18.8881 16.305H7.67968C7.57762 16.305 7.49512 16.3887 7.49512 16.4911V20.0427C7.49512 20.1451 7.57762 20.228 7.67968 20.228H16.8009C16.9038 20.228 16.9863 20.3116 16.9863 20.4141V22.6679C16.9863 22.7704 16.9038 22.8532 16.8009 22.8532H7.65076C7.54785 22.8532 7.46535 22.9369 7.46535 23.0393Z" fill="#ffffff"/>
+                    <path d="M25.2983 28.0951V13.6602C25.2983 13.5568 25.3808 13.474 25.4838 13.474H40.0119C40.1148 13.474 40.1973 13.5568 40.1973 13.6602V15.8543C40.1973 15.9567 40.1148 16.0395 40.0119 16.0395H28.6869C28.584 16.0395 28.5015 16.1232 28.5015 16.2256V19.4528C28.5015 19.5552 28.584 19.6389 28.6869 19.6389H37.8957C37.9986 19.6389 38.0811 19.7217 38.0811 19.8241V21.7826C38.0811 21.8851 37.9986 21.9687 37.8957 21.9687H28.6869C28.584 21.9687 28.5015 22.0515 28.5015 22.1548V25.5587C28.5015 25.6611 28.584 25.7439 28.6869 25.7439H40.0119C40.1148 25.7439 40.1973 25.8276 40.1973 25.9301V28.0951C40.1973 28.1976 40.1148 28.2812 40.0119 28.2812H25.4838C25.3808 28.2812 25.2983 28.1976 25.2983 28.0951Z" fill="#ffffff"/>
+                    <path d="M68.005 28.1627L64.7942 19.867C64.7414 19.7304 64.5586 19.7065 64.4718 19.8251L58.2688 28.3702C58.194 28.4718 58.0426 28.4718 57.9686 28.3693L51.7945 19.826C51.7077 19.7073 51.5249 19.7312 51.4713 19.8678L48.2613 28.1627C48.2333 28.2345 48.1652 28.2814 48.0887 28.2814H45.1373C45.0063 28.2814 44.917 28.1491 44.9646 28.027L50.6454 13.5596C50.6998 13.4221 50.8853 13.3999 50.9695 13.5212L57.9669 23.5517C58.0409 23.6567 58.1965 23.6567 58.2705 23.5517L65.2968 13.5203C65.381 13.3991 65.5665 13.4213 65.62 13.5596L71.3008 28.027C71.3493 28.1491 71.26 28.2814 71.129 28.2814H68.1776C68.1011 28.2814 68.033 28.2345 68.005 28.1627Z" fill="#ffffff"/>
+                    <path d="M100.382 28.0951V13.6602C100.382 13.5568 100.464 13.474 100.567 13.474H115.095C115.197 13.474 115.281 13.5568 115.281 13.6602V15.8543C115.281 15.9567 115.197 16.0395 115.095 16.0395H103.77C103.667 16.0395 103.585 16.1232 103.585 16.2256V19.4528C103.585 19.5552 103.667 19.6389 103.77 19.6389H112.979C113.082 19.6389 113.165 19.7217 113.165 19.8241V21.7826C113.165 21.8851 113.082 21.9687 112.979 21.9687H103.77C103.667 21.9687 103.585 22.0515 103.585 22.1548V25.5587C103.585 25.6611 103.667 25.7439 103.77 25.7439H115.095C115.197 25.7439 115.281 25.8276 115.281 25.9301V28.0951C115.281 28.1976 115.197 28.2812 115.095 28.2812H100.567C100.464 28.2812 100.382 28.1976 100.382 28.0951Z" fill="#ffffff"/>
+                    <path d="M119.297 13.4743H122.64C122.704 13.4743 122.764 13.5076 122.798 13.5631L128.728 23.247C128.801 23.3648 128.971 23.3657 129.043 23.2479L135.061 13.5622C135.095 13.5076 135.153 13.4743 135.218 13.4743H138.531C138.679 13.4743 138.767 13.6391 138.686 13.7628L129.04 28.343C128.967 28.454 128.804 28.4531 128.731 28.3421L119.142 13.7628C119.061 13.6391 119.15 13.4743 119.297 13.4743Z" fill="#ffffff"/>
+                    <path d="M143.548 28.0951V13.6602C143.548 13.5568 143.63 13.474 143.733 13.474H146.566C146.668 13.474 146.751 13.5568 146.751 13.6602V28.0951C146.751 28.1976 146.668 28.2812 146.566 28.2812H143.733C143.63 28.2812 143.548 28.1976 143.548 28.0951Z" fill="#ffffff"/>
+                    <path d="M158.796 28.0951V16.4322C158.796 16.3298 158.714 16.247 158.611 16.247H152.281C152.179 16.247 152.097 16.1633 152.097 16.0609V13.6602C152.097 13.5568 152.179 13.474 152.281 13.474H168.515C168.617 13.474 168.699 13.5568 168.699 13.6602V16.0609C168.699 16.1633 168.617 16.247 168.515 16.247H162.185C162.082 16.247 162 16.3298 162 16.4322V28.0951C162 28.1976 161.916 28.2812 161.814 28.2812H158.982C158.879 28.2812 158.796 28.1976 158.796 28.0951Z" fill="#ffffff"/>
+                    <path d="M179.842 28.0951V22.9215C179.842 22.8779 179.827 22.8353 179.798 22.802L172.195 13.7797C172.094 13.6593 172.179 13.474 172.337 13.474H175.819C175.873 13.474 175.925 13.4979 175.961 13.5406L181.316 19.9693C181.39 20.0581 181.527 20.0581 181.601 19.9693L186.957 13.5406C186.992 13.4979 187.045 13.474 187.099 13.474H190.552C190.71 13.474 190.796 13.6584 190.694 13.7797L183.119 22.802C183.091 22.8353 183.075 22.8779 183.075 22.9215V28.0951C183.075 28.1976 182.992 28.2812 182.89 28.2812H180.028C179.925 28.2812 179.842 28.1976 179.842 28.0951Z" fill="#ffffff"/>
+                    <path d="M89.3714 22.292C89.3714 22.292 90.5613 23.4215 91.3328 25.0351C91.2681 24.8737 90.5613 22.905 89.3714 21.4852V19.6454H84.9988C86.6387 20.1944 88.1177 21.1301 89.3714 22.292ZM93.9371 13.7401V14.2558H89.3714V9.64135C89.3714 8.41453 88.8569 7.28503 88.0854 6.47825C87.2817 5.67147 86.1564 5.1874 84.9342 5.1874C82.4914 5.1874 80.4977 7.18856 80.4977 9.64135V30.3923C80.4977 32.8451 82.4914 34.8462 84.9342 34.8462C87.3778 34.8462 89.3714 32.8451 89.3714 30.3923V23.1953C87.7962 21.5501 85.7388 20.3557 83.3913 19.9041L82.2337 19.6454V19.0324H93.9371V26.4233C93.9371 28.9076 92.908 31.1666 91.3005 32.8126C89.6606 34.4262 87.4101 35.4268 84.9342 35.4268C79.9832 35.4268 75.9644 31.3929 75.9644 26.4233V13.5788C75.9644 11.0936 76.9612 8.83371 78.601 7.221C80.2086 5.57414 82.4591 4.57442 84.9665 4.57442C89.9498 4.57442 93.9371 8.73724 93.9371 13.7401Z" fill="#ffffff"/>
+                </svg>
+                <p>Precision women's health care built for collaborative integration with health systems, providers, and payers.</p>
+            </div>
+            <div class="footer-column">
+                <h5>Solutions</h5>
+                <ul class="footer-links">
+                    <li><a href="#solution">Care Model</a></li>
+                    <li><a href="#partners">Partnerships</a></li>
+                    <li><a href="#science">Science</a></li>
+                    <li><a href="#value">Value</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h5>Company</h5>
+                <ul class="footer-links">
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h5>Contact</h5>
+                <ul class="footer-links">
+                    <li><a href="mailto:partnerships@femgevityhealth.com">Partnerships</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Resources</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 FemGevity Health. All rights reserved.</p>
+            <div class="footer-social">
+                <a href="#" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a href="#" aria-label="Twitter">
+                    <svg viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+                </a>
+                <a href="#" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // WebGPU/Canvas Animation
+        class HeroAnimation {
+            constructor() {
+                this.canvas = document.getElementById('hero-canvas');
+                this.supportsWebGPU = false;
+                this.init();
+            }
+
+            async init() {
+                // Check for WebGPU support
+                if (navigator.gpu) {
+                    try {
+                        const adapter = await navigator.gpu.requestAdapter();
+                        if (adapter) {
+                            this.device = await adapter.requestDevice();
+                            this.supportsWebGPU = true;
+                            await this.initWebGPU();
+                            return;
+                        }
+                    } catch (e) {
+                        console.log('WebGPU not available, using Canvas fallback');
+                    }
+                }
+                
+                // Fallback to Canvas 2D
+                this.initCanvas2D();
+            }
+
+            async initWebGPU() {
+                const context = this.canvas.getContext('webgpu');
+                const format = navigator.gpu.getPreferredCanvasFormat();
+                
+                this.resize();
+                window.addEventListener('resize', () => this.resize());
+                
+                context.configure({
+                    device: this.device,
+                    format: format,
+                    alphaMode: 'premultiplied',
+                });
+
+                // Shader code for organic flowing particles
+                const shaderCode = `
+                    struct Uniforms {
+                        time: f32,
+                        resolution: vec2f,
+                    }
+                    
+                    @group(0) @binding(0) var<uniform> uniforms: Uniforms;
+                    
+                    struct VertexOutput {
+                        @builtin(position) position: vec4f,
+                        @location(0) uv: vec2f,
+                    }
+                    
+                    @vertex
+                    fn vertexMain(@builtin(vertex_index) vertexIndex: u32) -> VertexOutput {
+                        var positions = array<vec2f, 6>(
+                            vec2f(-1.0, -1.0),
+                            vec2f(1.0, -1.0),
+                            vec2f(-1.0, 1.0),
+                            vec2f(-1.0, 1.0),
+                            vec2f(1.0, -1.0),
+                            vec2f(1.0, 1.0)
+                        );
+                        
+                        var output: VertexOutput;
+                        output.position = vec4f(positions[vertexIndex], 0.0, 1.0);
+                        output.uv = (positions[vertexIndex] + 1.0) * 0.5;
+                        return output;
+                    }
+                    
+                    fn noise(p: vec2f) -> f32 {
+                        return fract(sin(dot(p, vec2f(127.1, 311.7))) * 43758.5453);
+                    }
+                    
+                    fn smoothNoise(p: vec2f) -> f32 {
+                        let i = floor(p);
+                        let f = fract(p);
+                        let u = f * f * (3.0 - 2.0 * f);
+                        
+                        return mix(
+                            mix(noise(i), noise(i + vec2f(1.0, 0.0)), u.x),
+                            mix(noise(i + vec2f(0.0, 1.0)), noise(i + vec2f(1.0, 1.0)), u.x),
+                            u.y
+                        );
+                    }
+                    
+                    fn fbm(p: vec2f) -> f32 {
+                        var value = 0.0;
+                        var amplitude = 0.5;
+                        var frequency = 1.0;
+                        var pos = p;
+                        
+                        for (var i = 0; i < 5; i++) {
+                            value += amplitude * smoothNoise(pos * frequency);
+                            amplitude *= 0.5;
+                            frequency *= 2.0;
+                        }
+                        return value;
+                    }
+                    
+                    @fragment
+                    fn fragmentMain(input: VertexOutput) -> @location(0) vec4f {
+                        let uv = input.uv;
+                        let t = uniforms.time * 0.15;
+                        
+                        // Create flowing organic patterns
+                        var p = uv * 3.0;
+                        p.x += t * 0.5;
+                        
+                        let noise1 = fbm(p + vec2f(t * 0.3, t * 0.2));
+                        let noise2 = fbm(p * 1.5 + vec2f(-t * 0.2, t * 0.4));
+                        let noise3 = fbm(p * 0.8 + vec2f(t * 0.1, -t * 0.3));
+                        
+                        // Combine noises for organic flow
+                        let combined = noise1 * 0.5 + noise2 * 0.3 + noise3 * 0.2;
+                        
+                        // Create color gradient - teal to accent
+                        let teal = vec3f(0.008, 0.204, 0.212); // #023436
+                        let tealLight = vec3f(0.016, 0.353, 0.369); // #045a5e
+                        let accent = vec3f(0.831, 0.647, 0.455); // #d4a574
+                        
+                        // Mix colors based on noise
+                        var color = mix(teal, tealLight, combined);
+                        color = mix(color, accent, combined * combined * 0.15);
+                        
+                        // Add subtle highlights
+                        let highlight = smoothstep(0.6, 0.8, combined);
+                        color += vec3f(1.0, 1.0, 1.0) * highlight * 0.05;
+                        
+                        // Vignette effect
+                        let vignette = 1.0 - length((uv - 0.5) * 1.5);
+                        color *= smoothstep(0.0, 0.8, vignette);
+                        
+                        return vec4f(color, 0.8);
+                    }
+                `;
+
+                const shaderModule = this.device.createShaderModule({ code: shaderCode });
+                
+                // Create uniform buffer
+                this.uniformBuffer = this.device.createBuffer({
+                    size: 16,
+                    usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
+                });
+
+                const bindGroupLayout = this.device.createBindGroupLayout({
+                    entries: [{
+                        binding: 0,
+                        visibility: GPUShaderStage.FRAGMENT | GPUShaderStage.VERTEX,
+                        buffer: { type: 'uniform' }
+                    }]
+                });
+
+                this.bindGroup = this.device.createBindGroup({
+                    layout: bindGroupLayout,
+                    entries: [{
+                        binding: 0,
+                        resource: { buffer: this.uniformBuffer }
+                    }]
+                });
+
+                this.pipeline = this.device.createRenderPipeline({
+                    layout: this.device.createPipelineLayout({
+                        bindGroupLayouts: [bindGroupLayout]
+                    }),
+                    vertex: {
+                        module: shaderModule,
+                        entryPoint: 'vertexMain'
+                    },
+                    fragment: {
+                        module: shaderModule,
+                        entryPoint: 'fragmentMain',
+                        targets: [{
+                            format: format,
+                            blend: {
+                                color: {
+                                    srcFactor: 'src-alpha',
+                                    dstFactor: 'one-minus-src-alpha',
+                                    operation: 'add'
+                                },
+                                alpha: {
+                                    srcFactor: 'one',
+                                    dstFactor: 'one-minus-src-alpha',
+                                    operation: 'add'
+                                }
+                            }
+                        }]
+                    },
+                    primitive: { topology: 'triangle-list' }
+                });
+
+                this.context = context;
+                this.startTime = performance.now();
+                this.renderWebGPU();
+            }
+
+            renderWebGPU() {
+                const time = (performance.now() - this.startTime) / 1000;
+                
+                // Update uniforms
+                const uniformData = new Float32Array([
+                    time,
+                    0, // padding
+                    this.canvas.width,
+                    this.canvas.height
+                ]);
+                this.device.queue.writeBuffer(this.uniformBuffer, 0, uniformData);
+
+                const commandEncoder = this.device.createCommandEncoder();
+                const textureView = this.context.getCurrentTexture().createView();
+
+                const renderPass = commandEncoder.beginRenderPass({
+                    colorAttachments: [{
+                        view: textureView,
+                        loadOp: 'clear',
+                        storeOp: 'store',
+                        clearValue: { r: 0.008, g: 0.204, b: 0.212, a: 1 }
+                    }]
+                });
+
+                renderPass.setPipeline(this.pipeline);
+                renderPass.setBindGroup(0, this.bindGroup);
+                renderPass.draw(6);
+                renderPass.end();
+
+                this.device.queue.submit([commandEncoder.finish()]);
+                requestAnimationFrame(() => this.renderWebGPU());
+            }
+
+            initCanvas2D() {
+                this.ctx = this.canvas.getContext('2d');
+                this.resize();
+                window.addEventListener('resize', () => this.resize());
+                
+                this.particles = [];
+                this.waves = [];
+                
+                // Create particles
+                for (let i = 0; i < 80; i++) {
+                    this.particles.push({
+                        x: Math.random() * this.canvas.width,
+                        y: Math.random() * this.canvas.height,
+                        vx: (Math.random() - 0.5) * 0.5,
+                        vy: (Math.random() - 0.5) * 0.3,
+                        radius: Math.random() * 3 + 1,
+                        opacity: Math.random() * 0.3 + 0.1
+                    });
+                }
+                
+                // Create wave lines
+                for (let i = 0; i < 5; i++) {
+                    this.waves.push({
+                        y: this.canvas.height * (0.2 + i * 0.15),
+                        amplitude: 30 + Math.random() * 40,
+                        frequency: 0.003 + Math.random() * 0.002,
+                        speed: 0.5 + Math.random() * 0.5,
+                        phase: Math.random() * Math.PI * 2,
+                        opacity: 0.1 + Math.random() * 0.15
+                    });
+                }
+                
+                this.startTime = performance.now();
+                this.renderCanvas2D();
+            }
+
+            renderCanvas2D() {
+                const time = (performance.now() - this.startTime) / 1000;
+                const ctx = this.ctx;
+                const w = this.canvas.width;
+                const h = this.canvas.height;
+                
+                // Clear with gradient
+                const gradient = ctx.createLinearGradient(0, 0, w, h);
+                gradient.addColorStop(0, '#023436');
+                gradient.addColorStop(0.5, '#034547');
+                gradient.addColorStop(1, '#023436');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, w, h);
+                
+                // Draw waves
+                this.waves.forEach(wave => {
+                    ctx.beginPath();
+                    ctx.moveTo(0, wave.y);
+                    
+                    for (let x = 0; x <= w; x += 5) {
+                        const y = wave.y + 
+                            Math.sin(x * wave.frequency + time * wave.speed + wave.phase) * wave.amplitude +
+                            Math.sin(x * wave.frequency * 2 + time * wave.speed * 1.5) * wave.amplitude * 0.3;
+                        ctx.lineTo(x, y);
+                    }
+                    
+                    ctx.lineTo(w, h);
+                    ctx.lineTo(0, h);
+                    ctx.closePath();
+                    
+                    const waveGradient = ctx.createLinearGradient(0, wave.y - wave.amplitude, 0, h);
+                    waveGradient.addColorStop(0, `rgba(212, 165, 116, ${wave.opacity})`);
+                    waveGradient.addColorStop(0.5, `rgba(4, 90, 94, ${wave.opacity * 0.5})`);
+                    waveGradient.addColorStop(1, 'rgba(2, 52, 54, 0)');
+                    
+                    ctx.fillStyle = waveGradient;
+                    ctx.fill();
+                });
+                
+                // Draw and update particles
+                this.particles.forEach(p => {
+                    // Update position
+                    p.x += p.vx + Math.sin(time + p.y * 0.01) * 0.3;
+                    p.y += p.vy + Math.cos(time + p.x * 0.01) * 0.2;
+                    
+                    // Wrap around screen
+                    if (p.x < 0) p.x = w;
+                    if (p.x > w) p.x = 0;
+                    if (p.y < 0) p.y = h;
+                    if (p.y > h) p.y = 0;
+                    
+                    // Draw particle with glow
+                    const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius * 4);
+                    glow.addColorStop(0, `rgba(212, 165, 116, ${p.opacity})`);
+                    glow.addColorStop(0.5, `rgba(212, 165, 116, ${p.opacity * 0.3})`);
+                    glow.addColorStop(1, 'rgba(212, 165, 116, 0)');
+                    
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius * 4, 0, Math.PI * 2);
+                    ctx.fillStyle = glow;
+                    ctx.fill();
+                    
+                    // Core particle
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity * 1.5})`;
+                    ctx.fill();
+                });
+                
+                // Draw connecting lines between nearby particles
+                ctx.strokeStyle = 'rgba(212, 165, 116, 0.05)';
+                ctx.lineWidth = 1;
+                
+                for (let i = 0; i < this.particles.length; i++) {
+                    for (let j = i + 1; j < this.particles.length; j++) {
+                        const dx = this.particles[i].x - this.particles[j].x;
+                        const dy = this.particles[i].y - this.particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (dist < 150) {
+                            ctx.globalAlpha = (1 - dist / 150) * 0.3;
+                            ctx.beginPath();
+                            ctx.moveTo(this.particles[i].x, this.particles[i].y);
+                            ctx.lineTo(this.particles[j].x, this.particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                ctx.globalAlpha = 1;
+                
+                requestAnimationFrame(() => this.renderCanvas2D());
+            }
+
+            resize() {
+                const dpr = window.devicePixelRatio || 1;
+                const rect = this.canvas.getBoundingClientRect();
+                this.canvas.width = rect.width * dpr;
+                this.canvas.height = rect.height * dpr;
+            }
+        }
+
+        // Initialize animation
+        new HeroAnimation();
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe cards and sections for animation
+        document.querySelectorAll('.problem-card, .partner-card, .science-card, .how-step, .value-column').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
