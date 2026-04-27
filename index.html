@@ -276,8 +276,122 @@ section {
   background: var(--surf-green);
 }
 
+/* Hamburger button — hidden on desktop, shown on mobile */
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.25);
+  width: 44px;
+  height: 44px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 0;
+  transition: border-color 0.2s ease;
+}
+.nav-toggle:hover { border-color: rgba(255,255,255,0.5); }
+.nav-toggle-bar {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: var(--white);
+  transition: transform 0.3s ease, opacity 0.2s ease;
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* Mobile drawer (off-canvas) */
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100dvh;
+  width: min(86vw, 360px);
+  background: var(--slate-blue);
+  color: var(--white);
+  z-index: 200;
+  transform: translateX(100%);
+  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  pointer-events: none;
+  visibility: hidden;
+}
+.mobile-drawer.is-open {
+  transform: translateX(0);
+  pointer-events: auto;
+  visibility: visible;
+}
+.mobile-drawer-inner {
+  padding: 96px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: var(--space-5);
+}
+.mobile-drawer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 1.1;
+}
+.mobile-drawer-links a {
+  color: var(--white);
+  display: block;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  transition: color 0.2s ease;
+}
+.mobile-drawer-links a:hover { color: var(--surf-green); }
+.mobile-drawer-actions {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.mobile-drawer-cta { justify-content: center; width: 100%; }
+.mobile-drawer-patient {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  text-align: center;
+}
+.mobile-drawer-patient:hover { color: var(--white); }
+
+.mobile-drawer-scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 150;
+}
+.mobile-drawer-scrim.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+body.no-scroll { overflow: hidden; }
+
 @media (max-width: 900px) {
   .nav-links { display: none; }
+  .nav-actions { display: none; }
+  .nav-toggle { display: flex; }
 }
 
 /* =============================================================
@@ -1082,6 +1196,119 @@ section {
   transform: translateY(0);
 }
 
+/* =============================================================
+   MOBILE REFINEMENTS (consolidated)
+   These overrides come last so they win the cascade.
+   ============================================================= */
+
+/* Tighter horizontal padding on phones — every section gets more usable width */
+@media (max-width: 768px) {
+  :root { --content-pad: 20px; }
+}
+
+/* Allow long uppercase button text to wrap (e.g., "Book a 30-min Partnership Call →") */
+@media (max-width: 600px) {
+  .btn { white-space: normal; text-align: center; line-height: 1.25; }
+  .hero-ctas { flex-direction: column; align-items: stretch; gap: 12px; width: 100%; }
+  .hero-ctas .btn { width: 100%; justify-content: center; }
+  .final-cta-buttons { flex-direction: column; align-items: stretch; }
+  .final-cta-buttons .btn { width: 100%; justify-content: center; }
+}
+
+/* Hero: tighter on phones — stat-style breathing room w/o desktop padding */
+@media (max-width: 768px) {
+  .hero { padding: var(--space-5) 0 var(--space-5); }
+  .hero h1 { line-height: 1.08; }
+  .hero-sub { font-size: 17px; line-height: 1.55; }
+  .hero-identity { font-size: 16px; }
+  .hero-stats { padding: var(--space-4) 0 !important; }
+  .hero-stats-grid { gap: var(--space-3); }
+  .stat-value { font-size: 32px; }
+  .stat-label { font-size: 11px; }
+  .stat-source { font-size: 10px; }
+}
+
+/* Care Gap problem cards already stack at 768; tighten typography */
+@media (max-width: 768px) {
+  .gap-economic { padding: var(--space-4); }
+}
+
+/* The Care Model: skip the awkward 5→2 intermediate, go 5→1 directly */
+@media (max-width: 768px) {
+  .steps { grid-template-columns: 1fr !important; }
+  .step { padding: var(--space-4) 0 !important; }
+  .step:last-child { padding-bottom: 0 !important; }
+  .step-num { font-size: 36px; margin-bottom: var(--space-2); }
+}
+
+/* Card min-heights waste space when there's only one card visible per row */
+@media (max-width: 768px) {
+  .audience-card { min-height: 0; padding: var(--space-4); }
+  .audience-card h3 { font-size: 24px; }
+  .resource-card { min-height: 0; padding: var(--space-4); }
+  .resource-card h3 { font-size: 22px; }
+}
+
+/* Quality pillars: 3-col mid-step is fine; tighten the single-col edge case */
+@media (max-width: 700px) {
+  .quality-pillar { padding: var(--space-3) 0; }
+  .quality-num { font-size: 28px; }
+  .quality-pillar h3 { font-size: 17px; }
+}
+
+/* Patient promise: keep editorial weight but pull in the rule + spacing */
+@media (max-width: 600px) {
+  .patient-promise { padding: var(--space-5) 0; }
+  .patient-promise-text { font-size: 26px; line-height: 1.25; }
+  .patient-promise-text .accent { margin-top: var(--space-1); font-size: 22px; }
+}
+
+/* Leader card on phones */
+@media (max-width: 600px) {
+  .leader-name { font-size: 28px; }
+  .leader-quote { font-size: 18px; padding-left: var(--space-2); }
+}
+
+/* Final CTA: tighten the headline on phones (it's a long sentence) */
+@media (max-width: 600px) {
+  .final-cta { padding: var(--space-6) 0; }
+  .final-cta h2 { font-size: 26px; line-height: 1.22; }
+  .final-cta p { font-size: 15px; }
+}
+
+/* Footer: collapse to single column on phones; stack legal links */
+@media (max-width: 600px) {
+  .footer-grid { grid-template-columns: 1fr !important; gap: var(--space-4); }
+  .footer-brand p { max-width: none; }
+  .compliance-strip { gap: var(--space-2); }
+  .compliance-badge { font-size: 10px; padding: 6px 10px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: var(--space-2); }
+  .footer-bottom > div:last-child { display: flex; flex-wrap: wrap; gap: 8px var(--space-2); }
+  .footer-bottom a { margin-right: 0; }
+}
+
+/* Press strip on small phones — drop to 2 cols so logos stay readable */
+@media (max-width: 480px) {
+  .press-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Section header line-height on mobile (long H2s) */
+@media (max-width: 600px) {
+  .section-header h2 { line-height: 1.15; }
+  .lede { font-size: 16px; }
+}
+
+/* Lock the hero video aspect a touch wider on phones so it doesn't dominate the fold */
+@media (max-width: 600px) {
+  .hero-visual { aspect-ratio: 16/10; }
+}
+
+/* Respect reduced motion: kill the reveal slide for users who set the preference */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .mobile-drawer { transition: none; }
+}
+
 </style>
 </head>
 
@@ -1104,8 +1331,31 @@ section {
       <a href="https://www.femgevityhealth.com" class="nav-patient-link">For Patients <span aria-hidden="true">→</span></a>
       <a href="#partnership" class="nav-cta">Book a Partnership Call</a>
     </div>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-controls="mobile-drawer" aria-expanded="false">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
   </div>
 </nav>
+
+<!-- Mobile drawer -->
+<div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+  <div class="mobile-drawer-inner">
+    <ul class="mobile-drawer-links">
+      <li><a href="#solutions">Solutions</a></li>
+      <li><a href="#partners">Partners</a></li>
+      <li><a href="#science">Science</a></li>
+      <li><a href="#resources">Resources</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <div class="mobile-drawer-actions">
+      <a href="#partnership" class="btn btn-on-dark mobile-drawer-cta">Book a Partnership Call <span class="arrow" aria-hidden="true">→</span></a>
+      <a href="https://www.femgevityhealth.com" class="mobile-drawer-patient">For Patients <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</div>
+<div class="mobile-drawer-scrim" aria-hidden="true"></div>
 
 <!-- ============================================================= -->
 <!-- HERO                                                           -->
@@ -1584,6 +1834,35 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Mobile drawer
+(function () {
+  const toggle = document.querySelector('.nav-toggle');
+  const drawer = document.getElementById('mobile-drawer');
+  const scrim  = document.querySelector('.mobile-drawer-scrim');
+  if (!toggle || !drawer || !scrim) return;
+
+  const setOpen = (open) => {
+    toggle.setAttribute('aria-expanded', String(open));
+    drawer.setAttribute('aria-hidden', String(!open));
+    drawer.classList.toggle('is-open', open);
+    scrim.classList.toggle('is-visible', open);
+    document.body.classList.toggle('no-scroll', open);
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+
+  toggle.addEventListener('click', () => {
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    setOpen(!isOpen);
+  });
+  scrim.addEventListener('click', () => setOpen(false));
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  // If the viewport grows past the breakpoint, reset state cleanly
+  window.matchMedia('(min-width: 901px)').addEventListener('change', (e) => {
+    if (e.matches) setOpen(false);
+  });
+})();
 
 // Slow the hero eye video to ~0.5x for a more editorial, precision-care feel.
 // Tweak HERO_VIDEO_RATE between 0.25 (very slow) and 1.0 (normal) to taste.
