@@ -1864,9 +1864,9 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   });
 })();
 
-// Slow the hero eye video to ~0.5x for a more editorial, precision-care feel.
+// Slow the hero eye video for a more editorial, precision-care feel.
 // Tweak HERO_VIDEO_RATE between 0.25 (very slow) and 1.0 (normal) to taste.
-const HERO_VIDEO_RATE = 0.5;
+const HERO_VIDEO_RATE = 0.3;
 const heroVideo = document.querySelector('.hero-video');
 if (heroVideo) {
   const applyRate = () => { heroVideo.playbackRate = HERO_VIDEO_RATE; };
