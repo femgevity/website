@@ -18,18 +18,20 @@
    ============================================================= */
 
 :root {
-  /* Brand colors (exact from brand guide) */
-  --slate-blue: #2F4858;
+  /* Brand colors — emerald primary matches femgevityhealth.com (#023436),
+     surf green retained as the warm accent tone */
+  --slate-blue: #023436;          /* deep emerald — brand primary */
+  --slate-blue-light: #045a5e;    /* lighter emerald, for hover/edge states */
   --surf-green: #CED1C8;
   --spring-white: #F8F6F1;
   --black: #000000;
   --white: #FFFFFF;
 
-  /* Derived utility tones (kept on-brand) */
-  --slate-blue-90: rgba(47, 72, 88, 0.9);
-  --slate-blue-70: rgba(47, 72, 88, 0.7);
-  --slate-blue-50: rgba(47, 72, 88, 0.5);
-  --slate-blue-15: rgba(47, 72, 88, 0.15);
+  /* Derived utility tones, all built off the emerald primary */
+  --slate-blue-90: rgba(2, 52, 54, 0.9);
+  --slate-blue-70: rgba(2, 52, 54, 0.7);
+  --slate-blue-50: rgba(2, 52, 54, 0.5);
+  --slate-blue-15: rgba(2, 52, 54, 0.15);
   --surf-green-50: rgba(206, 209, 200, 0.5);
   --ink: #1A1A1A;
   --ink-muted: #5C6770;
@@ -217,15 +219,23 @@ section {
   gap: var(--space-4);
 }
 .logo {
-  font-family: var(--font-display);
-  font-size: 26px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
   color: var(--white);
 }
-.logo .g-mark {
-  display: inline-block;
-  position: relative;
+.logo img {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+@media (max-width: 600px) {
+  .logo img { height: 24px; }
+}
+/* Footer logo sits in dark ink, slightly larger for hierarchy */
+.footer-brand .logo img { height: 32px; }
+@media (max-width: 600px) {
+  .footer-brand .logo img { height: 28px; }
 }
 .nav-links {
   display: flex;
@@ -1319,7 +1329,9 @@ body.no-scroll { overflow: hidden; }
 <!-- ============================================================= -->
 <nav class="nav">
   <div class="container nav-inner">
-    <a href="./" class="logo">FEM<span class="g-mark">G</span>EVITY</a>
+    <a href="./" class="logo" aria-label="FemGevity Health">
+      <img src="assets/logo/femgevity-on-dark.svg" alt="FemGevity Health" />
+    </a>
     <ul class="nav-links">
       <li><a href="#solutions">Solutions</a></li>
       <li><a href="#partners">Partners</a></li>
@@ -1770,7 +1782,9 @@ body.no-scroll { overflow: hidden; }
 
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="logo">FEM<span class="g-mark">G</span>EVITY</div>
+        <div class="logo">
+          <img src="assets/logo/femgevity-on-dark.svg" alt="FemGevity Health" />
+        </div>
         <p>Precision women's health, built for collaborative integration with health systems, providers, and payers.</p>
       </div>
       <div class="footer-col">
