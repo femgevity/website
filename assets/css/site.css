@@ -1,10 +1,15 @@
 /* =============================================================
-   FEMGEVITY — SHARED SITE CSS
-   Used by sub-pages (for-*/, partnership/, legal/). The homepage
-   (index.html) keeps its full inline <style>; this file ships only
-   the design tokens, base typography, and shared components needed
-   by sub-pages so they render on-brand without duplicating the
-   homepage's full stylesheet.
+   FEMGEVITY - SHARED SITE CSS
+   Used by sub-pages: for-providers, for-health-systems,
+   for-fertility-centers, for-employers, partnership, legal.
+   The homepage (index.html) keeps its full inline style block;
+   this file ships the design tokens, base typography, and shared
+   components for sub-pages so they render on-brand without
+   duplicating the homepage's full stylesheet.
+
+   Critical background colors carry explicit hex fallbacks before
+   the var() declaration so the page degrades gracefully if a
+   browser fails to resolve a custom property for any reason.
    ============================================================= */
 
 :root {
@@ -41,7 +46,9 @@ body {
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.6;
+  color: #1A1A1A;
   color: var(--ink);
+  background: #F8F6F1;
   background: var(--spring-white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -55,6 +62,7 @@ img { max-width: 100%; display: block; }
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  color: #023436;
   color: var(--slate-blue);
   margin-bottom: var(--space-3);
   display: inline-flex;
@@ -65,12 +73,20 @@ img { max-width: 100%; display: block; }
   content: '';
   width: 28px;
   height: 1px;
+  background: #023436;
   background: var(--slate-blue);
   display: inline-block;
+}
+.eyebrow--surf::before {
+  background: #CED1C8;
+  background: var(--surf-green);
+  width: 36px;
+  height: 2px;
 }
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
+  color: #1A1A1A;
   color: var(--ink);
   letter-spacing: -0.01em;
   font-weight: 500;
@@ -83,6 +99,7 @@ h3 { font-size: clamp(20px, 2vw, 26px); line-height: 1.25; }
   font-family: var(--font-sans);
   font-size: 18px;
   line-height: 1.6;
+  color: #5C6770;
   color: var(--ink-muted);
   max-width: 640px;
 }
@@ -94,7 +111,9 @@ section { padding: var(--space-7) 0; }
   section { padding: var(--space-6) 0; }
 }
 
-/* Buttons */
+/* =============================================================
+   BUTTONS
+   ============================================================= */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -110,24 +129,66 @@ section { padding: var(--space-7) 0; }
   transition: all 0.25s ease;
   white-space: nowrap;
 }
-.btn-primary { background: var(--slate-blue); color: var(--white); border-color: var(--slate-blue); }
-.btn-primary:hover { background: var(--black); border-color: var(--black); transform: translateY(-1px); }
-.btn-secondary { background: transparent; color: var(--slate-blue); border-color: var(--slate-blue); }
-.btn-secondary:hover { background: var(--slate-blue); color: var(--white); }
-.btn-on-dark { background: var(--white); color: var(--slate-blue); border-color: var(--white); }
-.btn-on-dark:hover { background: transparent; color: var(--white); border-color: var(--white); }
+.btn-primary {
+  background: #023436;
+  background: var(--slate-blue);
+  color: #FFFFFF;
+  color: var(--white);
+  border-color: #023436;
+  border-color: var(--slate-blue);
+}
+.btn-primary:hover { background: #000; border-color: #000; transform: translateY(-1px); }
+.btn-secondary {
+  background: transparent;
+  color: #023436;
+  color: var(--slate-blue);
+  border-color: #023436;
+  border-color: var(--slate-blue);
+}
+.btn-secondary:hover {
+  background: #023436;
+  background: var(--slate-blue);
+  color: #FFFFFF;
+  color: var(--white);
+}
+.btn-on-dark {
+  background: #FFFFFF;
+  background: var(--white);
+  color: #023436;
+  color: var(--slate-blue);
+  border-color: #FFFFFF;
+  border-color: var(--white);
+}
+.btn-on-dark:hover { background: transparent; color: #FFFFFF; border-color: #FFFFFF; }
+.btn-ghost-on-dark {
+  background: transparent;
+  color: #FFFFFF;
+  color: var(--white);
+  border-color: rgba(255,255,255,0.4);
+}
+.btn-ghost-on-dark:hover { border-color: #FFFFFF; }
 .btn .arrow { transition: transform 0.25s ease; }
 .btn:hover .arrow { transform: translateX(4px); }
 @media (max-width: 600px) {
   .btn { white-space: normal; text-align: center; line-height: 1.25; }
 }
 
-/* Slim sub-page nav */
+/* =============================================================
+   SUB-PAGE NAV
+   Higher specificity (`nav.subnav`) and explicit hex fallback
+   so the emerald background renders bulletproof on every device.
+   ============================================================= */
+nav.subnav,
 .subnav {
+  display: block;
+  background: #023436;
   background: var(--slate-blue);
+  color: #FFFFFF;
   color: var(--white);
-  padding: 18px 0;
+  padding: 20px 0;
   border-bottom: 1px solid rgba(255,255,255,0.08);
+  position: relative;
+  z-index: 10;
 }
 .subnav-inner {
   display: flex;
@@ -135,7 +196,13 @@ section { padding: var(--space-7) 0; }
   justify-content: space-between;
   gap: var(--space-3);
 }
-.subnav .logo img { height: 26px; width: auto; display: block; }
+.subnav .logo {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+  color: #FFFFFF;
+}
+.subnav .logo img { height: 28px; width: auto; display: block; }
 .subnav-back {
   font-family: var(--font-sans);
   font-size: 12px;
@@ -148,15 +215,18 @@ section { padding: var(--space-7) 0; }
   gap: 8px;
   transition: color 0.2s ease;
 }
-.subnav-back:hover { color: var(--white); }
+.subnav-back:hover { color: #FFFFFF; }
 .subnav-back .arrow { display: inline-block; transition: transform 0.2s ease; }
 .subnav-back:hover .arrow { transform: translateX(-3px); }
 
-/* Sub-page hero */
+/* =============================================================
+   SUB-PAGE HERO
+   ============================================================= */
 .subhero {
   padding: var(--space-7) 0 var(--space-6);
+  background: #F8F6F1;
   background: var(--spring-white);
-  border-bottom: 1px solid var(--slate-blue-15);
+  border-bottom: 1px solid rgba(2, 52, 54, 0.15);
 }
 .subhero h1 { margin-bottom: var(--space-3); max-width: 880px; }
 .subhero .lede { margin-bottom: var(--space-5); font-size: 19px; max-width: 720px; }
@@ -166,15 +236,24 @@ section { padding: var(--space-7) 0; }
   .subhero-ctas .btn { width: 100%; justify-content: center; }
 }
 
-/* Generic content blocks for sub-pages */
-.content-block { padding: var(--space-6) 0; border-top: 1px solid var(--slate-blue-15); }
+/* =============================================================
+   GENERIC CONTENT BLOCKS
+   ============================================================= */
+.content-block {
+  padding: var(--space-6) 0;
+  border-top: 1px solid rgba(2, 52, 54, 0.15);
+}
 .content-block .container { max-width: 880px; }
 .content-block h2 { margin-bottom: var(--space-3); }
 .content-block p { font-size: 17px; line-height: 1.65; color: var(--ink-muted); margin-bottom: var(--space-3); max-width: 720px; }
 .content-block ul { padding-left: 1.2em; margin-bottom: var(--space-3); color: var(--ink-muted); }
 .content-block li { font-size: 16px; line-height: 1.6; margin-bottom: 8px; }
 .content-block strong { color: var(--ink); }
-.content-block.on-surf { background: var(--surf-green); }
+.content-block.on-surf {
+  background: #CED1C8;
+  background: var(--surf-green);
+  border-top: none;
+}
 
 .value-grid {
   display: grid;
@@ -183,12 +262,14 @@ section { padding: var(--space-7) 0; }
   margin-top: var(--space-5);
 }
 .value-card {
+  border-top: 2px solid #023436;
   border-top: 2px solid var(--slate-blue);
   padding-top: var(--space-3);
 }
 .value-card .num {
   font-family: var(--font-display);
   font-size: clamp(36px, 4vw, 48px);
+  color: #023436;
   color: var(--slate-blue);
   line-height: 1;
   margin-bottom: var(--space-2);
@@ -200,17 +281,22 @@ section { padding: var(--space-7) 0; }
   .value-grid { grid-template-columns: 1fr; gap: var(--space-3); }
 }
 
-/* Closing CTA band */
+/* =============================================================
+   CLOSING CTA BAND
+   ============================================================= */
 .subcta {
+  background: #023436;
   background: var(--slate-blue);
+  color: #FFFFFF;
   color: var(--white);
   padding: var(--space-7) 0;
   text-align: center;
+  border-top: 3px solid #CED1C8;
   border-top: 3px solid var(--surf-green);
 }
 .subcta .eyebrow { color: var(--surf-green); justify-content: center; }
 .subcta .eyebrow::before { background: var(--surf-green); }
-.subcta h2 { color: var(--white); max-width: 760px; margin: 0 auto var(--space-3); }
+.subcta h2 { color: #FFFFFF; max-width: 760px; margin: 0 auto var(--space-3); }
 .subcta p { color: rgba(255,255,255,0.8); max-width: 560px; margin: 0 auto var(--space-4); }
 .subcta-ctas { display: flex; gap: var(--space-2); justify-content: center; flex-wrap: wrap; }
 @media (max-width: 600px) {
@@ -218,34 +304,163 @@ section { padding: var(--space-7) 0; }
   .subcta-ctas .btn { width: 100%; justify-content: center; }
 }
 
-/* Slim footer for sub-pages */
+/* =============================================================
+   SLIM FOOTER FOR SUB-PAGES
+   ============================================================= */
 .subfooter {
+  background: #1A1A1A;
   background: var(--ink);
   color: rgba(255,255,255,0.7);
   padding: var(--space-4) 0;
   text-align: center;
   font-size: 12px;
+  border-top: 3px solid #CED1C8;
   border-top: 3px solid var(--surf-green);
 }
 .subfooter a { color: rgba(255,255,255,0.85); margin: 0 var(--space-2); }
-.subfooter a:hover { color: var(--white); }
+.subfooter a:hover { color: #FFFFFF; }
 
-/* Coming-soon callout */
+/* =============================================================
+   COMING-SOON CALLOUT
+   ============================================================= */
 .coming-soon-callout {
-  border: 1px dashed var(--slate-blue-15);
-  background: var(--white);
+  border: 1px dashed rgba(2, 52, 54, 0.2);
+  background: #FFFFFF;
   padding: var(--space-3) var(--space-4);
   font-family: var(--font-sans);
   font-size: 14px;
   color: var(--ink-muted);
   display: inline-block;
-  margin-top: var(--space-3);
+  margin-top: var(--space-4);
+  border-left: 3px solid #CED1C8;
+  border-left: 3px solid var(--surf-green);
 }
-.coming-soon-callout strong { color: var(--slate-blue); display: block; margin-bottom: 4px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; font-size: 11px; }
+.coming-soon-callout strong {
+  color: var(--slate-blue);
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 11px;
+}
 
-/* Legal page anchors */
-.legal-section { padding: var(--space-6) 0; border-top: 1px solid var(--slate-blue-15); }
-.legal-section h2 { margin-bottom: var(--space-3); }
-.legal-section p { font-size: 16px; line-height: 1.7; color: var(--ink-muted); margin-bottom: var(--space-3); max-width: 760px; }
-.legal-toc { padding: var(--space-4) 0 0; font-size: 14px; }
-.legal-toc a { display: inline-block; margin-right: var(--space-3); color: var(--slate-blue); border-bottom: 1px solid var(--surf-green); padding-bottom: 2px; }
+/* =============================================================
+   LEGAL PAGE — TOC + section design
+   The TOC pills sit on the Surf Green hero band so they read
+   as deliberate document navigation, not afterthought text.
+   ============================================================= */
+.legal-hero {
+  background: #023436;
+  background: var(--slate-blue);
+  color: #FFFFFF;
+  padding: var(--space-7) 0 var(--space-6);
+}
+.legal-hero .eyebrow { color: var(--surf-green); }
+.legal-hero .eyebrow::before { background: var(--surf-green); }
+.legal-hero h1 { color: #FFFFFF; max-width: 880px; margin-bottom: var(--space-3); }
+.legal-hero .lede { color: rgba(255,255,255,0.8); max-width: 720px; margin-bottom: var(--space-5); }
+
+.legal-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.legal-toc a {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  padding: 10px 16px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.04);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.legal-toc a::before {
+  content: '';
+  width: 10px;
+  height: 2px;
+  background: var(--surf-green);
+  display: inline-block;
+}
+.legal-toc a:hover {
+  border-color: var(--surf-green);
+  background: rgba(206, 209, 200, 0.1);
+  color: var(--surf-green);
+}
+
+.legal-section {
+  padding: var(--space-7) 0;
+  border-bottom: 1px solid rgba(2, 52, 54, 0.12);
+  scroll-margin-top: 24px;
+}
+.legal-section:last-of-type { border-bottom: none; }
+.legal-section .container { max-width: 880px; }
+.legal-section h2 {
+  font-size: clamp(28px, 3.4vw, 38px);
+  margin-bottom: var(--space-4);
+  position: relative;
+  padding-left: var(--space-3);
+  border-left: 3px solid #CED1C8;
+  border-left: 3px solid var(--surf-green);
+  line-height: 1.15;
+}
+.legal-section .section-num {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--slate-blue);
+  display: block;
+  margin-bottom: var(--space-2);
+}
+.legal-section p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink-muted);
+  margin-bottom: var(--space-3);
+  max-width: 760px;
+}
+.legal-section a {
+  color: var(--slate-blue);
+  border-bottom: 1px solid var(--surf-green);
+  padding-bottom: 1px;
+  transition: border-color 0.2s ease;
+}
+.legal-section a:hover { border-bottom-color: var(--slate-blue); }
+
+.legal-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--slate-blue);
+  background: rgba(206, 209, 200, 0.4);
+  padding: 6px 12px;
+  border-left: 3px solid var(--surf-green);
+  margin-bottom: var(--space-3);
+}
+.legal-status-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--slate-blue);
+  display: inline-block;
+}
+
+@media (max-width: 600px) {
+  .legal-toc { gap: 8px; }
+  .legal-toc a { padding: 8px 12px; font-size: 11px; }
+  .legal-section h2 { padding-left: var(--space-2); border-left-width: 2px; }
+}
