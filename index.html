@@ -1161,7 +1161,8 @@ body.no-scroll { overflow: hidden; }
 .intake-form textarea {
   width: 100%;
   font-family: var(--font-sans);
-  font-size: 15px;
+  /* 16px on inputs prevents iOS Safari from auto-zooming on focus */
+  font-size: 16px;
   color: var(--ink);
   padding: 12px 14px;
   background: var(--white);
