@@ -3213,7 +3213,7 @@ body.no-scroll { overflow: hidden; }
 .hero--video {
   position: relative;
   padding: var(--space-8) 0;
-  min-height: 78vh;
+  min-height: 62vh;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -3221,16 +3221,16 @@ body.no-scroll { overflow: hidden; }
 }
 .hero-bg-video {
   position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; display: block; z-index: 0;
+  object-fit: cover; object-position: right center; display: block; z-index: 0;
 }
 .hero-scrim {
   position: absolute; inset: 0; z-index: 1;
-  /* IMPORTANT: hero-eye.mov is a watermarked Adobe Stock comp (same asset the
-     prior live site used). This scrim is intentionally heavy so the watermark
-     is not legible and the video reads as an ambient emerald texture. Once a
-     LICENSED, watermark-free eye video replaces the asset, lighten these stops
-     (e.g. 0.85 / 0.70 / 0.42) so the footage shows at full clarity. */
-  background: linear-gradient(90deg, rgba(2,52,54,0.975) 0%, rgba(2,52,54,0.95) 50%, rgba(2,52,54,0.91) 100%);
+  /* Left-to-right gradient: dark behind the text (left) so the white headline
+     stays legible, clearing toward the right so the eye footage shows. Note
+     hero-eye.mov is a watermarked Adobe Stock comp - a faint "Adobe Stock"
+     mark may show on the right until a licensed, watermark-free file replaces
+     the asset (then this can stay as-is). */
+  background: linear-gradient(90deg, rgba(2,52,54,0.94) 0%, rgba(2,52,54,0.86) 32%, rgba(2,52,54,0.45) 64%, rgba(2,52,54,0.20) 100%);
 }
 .hero--video .container { position: relative; z-index: 2; }
 .hero--video .hero-content { max-width: 660px; }
@@ -3242,7 +3242,9 @@ body.no-scroll { overflow: hidden; }
 .hero--video .hero-sub strong { color: #fff; }
 @media (max-width: 900px) {
   .hero--video { min-height: 0; padding: var(--space-7) 0; }
-  .hero-scrim { background: linear-gradient(180deg, rgba(2,52,54,0.965) 0%, rgba(2,52,54,0.985) 100%); }
+  /* On phones text sits over the whole frame, so keep it darker at top
+     (behind the headline) and let the eye show lower down. */
+  .hero-scrim { background: linear-gradient(180deg, rgba(2,52,54,0.86) 0%, rgba(2,52,54,0.72) 60%, rgba(2,52,54,0.5) 100%); }
 }
 @media (max-width: 600px) {
   .hero--video .hero-ctas { flex-direction: column; align-items: stretch; gap: 12px; }
