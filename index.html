@@ -3279,6 +3279,84 @@ body.no-scroll { overflow: hidden; }
 .intake-form-wrap select,
 .intake-form-wrap textarea { font-size: 16px; }
 
+/* =============================================================
+   SECTION IMAGERY (from femgevityhealth.com asset library)
+   ============================================================= */
+/* Care Model - product dashboard proof */
+.care-model-visual {
+  margin: var(--space-7) auto 0;
+  max-width: 1000px;
+  text-align: center;
+}
+.care-model-visual img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 24px 64px rgba(2, 52, 54, 0.18);
+  border: 1px solid var(--slate-blue-15);
+}
+.care-model-visual figcaption {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--ink-muted);
+  margin-top: var(--space-3);
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
+}
+
+/* Approach - clinician image beside the intro */
+.identity-intro {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: var(--space-7);
+  align-items: center;
+  margin-bottom: var(--space-6);
+}
+.identity-photo { overflow: hidden; border-radius: 4px; }
+.identity-photo img {
+  width: 100%;
+  height: 100%;
+  max-height: 380px;
+  object-fit: cover;
+  display: block;
+  border-radius: 4px;
+}
+@media (max-width: 900px) {
+  .identity-intro { grid-template-columns: 1fr; gap: var(--space-5); }
+  .identity-photo img { max-height: 300px; }
+}
+
+/* Patient Promise - warm portrait beside the promise line */
+.patient-promise-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: var(--space-7);
+  align-items: center;
+}
+.patient-promise .patient-promise-text { margin: 0; text-align: left; }
+.patient-promise .patient-promise-rule { margin: 0 0 var(--space-4); }
+.patient-promise-photo {
+  overflow: hidden;
+  border-radius: 4px;
+  max-width: 360px;
+}
+.patient-promise-photo img {
+  width: 100%;
+  height: 100%;
+  max-height: 460px;
+  object-fit: cover;
+  display: block;
+  border-radius: 4px;
+}
+@media (max-width: 768px) {
+  .patient-promise-grid { grid-template-columns: 1fr; gap: var(--space-5); text-align: center; }
+  .patient-promise-photo { max-width: 280px; margin: 0 auto; }
+  .patient-promise .patient-promise-text { text-align: center; }
+  .patient-promise .patient-promise-rule { margin: 0 auto var(--space-3); }
+}
+
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
@@ -3792,10 +3870,15 @@ body.no-scroll { overflow: hidden; }
 <!-- ============================================================= -->
 <section class="identity" id="solutions">
   <div class="container">
-    <div class="section-header reveal">
-      <span class="eyebrow">Our Approach</span>
-      <h2>We do not operate in isolation. We operate in alignment.</h2>
-      <p class="lede">FemGevity is the clinical infrastructure layer for existing practices — not a referral destination, and not a competing clinic. We integrate directly into your care ecosystem, communicate clearly with the referring physician, and document thoroughly so the patient remains under coordinated oversight. Our role is to extend your capabilities, not replace them.</p>
+    <div class="identity-intro">
+      <div class="section-header reveal" style="margin-bottom: 0;">
+        <span class="eyebrow">Our Approach</span>
+        <h2>We do not operate in isolation. We operate in alignment.</h2>
+        <p class="lede">FemGevity is the clinical infrastructure layer for existing practices &mdash; not a referral destination, and not a competing clinic. We integrate into your care ecosystem, communicate with the referring physician, and document thoroughly. Our role is to extend your capabilities, not replace them.</p>
+      </div>
+      <figure class="identity-photo reveal">
+        <img src="assets/images/med-consultation.webp" alt="A board-certified clinician on a telehealth consultation" loading="lazy" width="1080" height="720" />
+      </figure>
     </div>
 
     <div class="pillar-grid">
@@ -3857,12 +3940,17 @@ body.no-scroll { overflow: hidden; }
 <!-- PATIENT PROMISE BAND                                           -->
 <!-- ============================================================= -->
 <section class="patient-promise">
-  <div class="container">
-    <div class="patient-promise-rule"></div>
-    <p class="patient-promise-text">
-      Your patient remains your patient.
-      <span class="accent">We provide the specialized layer that enhances their care.</span>
-    </p>
+  <div class="container patient-promise-grid">
+    <figure class="patient-promise-photo reveal">
+      <img src="assets/images/lifestyle-women.jpg" alt="A woman in her forties, calm and confident" loading="lazy" width="683" height="1024" />
+    </figure>
+    <div class="patient-promise-copy reveal">
+      <div class="patient-promise-rule"></div>
+      <p class="patient-promise-text">
+        Your patient remains your patient.
+        <span class="accent">We provide the specialized layer that enhances their care.</span>
+      </p>
+    </div>
   </div>
 </section>
 
@@ -3904,6 +3992,11 @@ body.no-scroll { overflow: hidden; }
         <p>Care plans designed against your patient's actual coverage &mdash; leveraging your practice's in-network status where possible, with transparent patient cost where not.</p>
       </div>
     </div>
+
+    <figure class="care-model-visual reveal">
+      <img src="assets/images/dashboard.webp" alt="The FemGevity clinical dashboard showing hormone levels, symptom tracking, risk assessment, lab results, and the treatment plan — all returned to the partnered physician's record." loading="lazy" width="1080" height="608" />
+      <figcaption>One shared record. Every encounter, lab, and care plan flows back to your team &mdash; no parallel charts.</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -4252,9 +4345,8 @@ body.no-scroll { overflow: hidden; }
           <div class="member-featured-cred">MBA</div>
           <div class="member-featured-role">Founder &amp; CEO</div>
           <div class="member-featured-bio">
-            <p>Michele Wispelwey is rewriting what women's healthcare looks like &mdash; and what it's worth. As CEO and Founder of FemGevity, she brings 18+ years of healthcare leadership forged at the highest levels of the industry, including Fortune 500 giants Quest Diagnostics and LabCorp, where she built a $40M client portfolio and led the development of a women's health platform that culminated in a $60M acquisition by a publicly traded diagnostic lab.</p>
-            <p>A pioneer before precision medicine was a category, she introduced molecular genetics, cancer biomarkers, and advanced PCR testing to NYC's elite physician networks &mdash; part of launching the Metro area's first saliva-based COVID-19 PCR test. MBA, Northeastern University. Co-Founder, FLOW Dental, an integrative dental practice built on the premise that oral health and whole-body wellness are inseparable.</p>
-            <p>Michele founded FemGevity because she saw the gap no one else was willing to close: precision, reimbursable care for every woman who has been underserved, undertreated, or simply overlooked.</p>
+            <p>18+ years in healthcare leadership at Quest Diagnostics and LabCorp &mdash; built a $40M client portfolio and a women's health platform acquired for $60M. Introduced molecular genetics and advanced PCR testing to NYC's elite physician networks. MBA, Northeastern.</p>
+            <p>She founded FemGevity to close the gap no one else would: precision, reimbursable care for every woman who has been underserved or overlooked.</p>
           </div>
         </div>
       </div>
