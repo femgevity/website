@@ -1,0 +1,8 @@
+# Temp files used by the local workflow (never deploy)
+.commit-msg.tmp
+_vidtest.html
+*.tmp
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
