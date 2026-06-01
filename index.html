@@ -466,6 +466,13 @@ PRE-LAUNCH GATE — DO NOT SHIP TO PRODUCTION UNTIL:
   /* Layout */
   --max-width: 1280px;
   --content-pad: 32px;
+
+  /* Corner radius scale (soft, clinical rounding) */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
 }
 
 /* RESET */
@@ -756,31 +763,64 @@ section {
   flex-wrap: wrap;
 }
 
+/* Contained, framed hero media — matches femgevityhealth.com:
+   a large rounded card inset in a light page, soft drop shadow,
+   light overlay (not a dark cinematic wash). */
 .hero-visual {
   position: relative;
   aspect-ratio: 4/5;
-  background: var(--surf-green);
+  background: var(--slate-blue);
   overflow: hidden;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 20px 60px -20px rgba(2, 52, 54, 0.18),
+              0 8px 20px -8px rgba(2, 52, 54, 0.12);
 }
-.hero-visual::after {
-  content: 'Clinical leadership / dashboard hero — replace with founder portrait or product shot';
+.hero-video {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius-xl);
+}
+/* Light overlay: keeps the caption legible at the bottom edge only,
+   leaving the rest of the footage bright and clear. */
+.hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-xl);
+  pointer-events: none;
+  background: linear-gradient(180deg,
+    rgba(248, 246, 241, 0.04) 0%,
+    transparent 22%,
+    transparent 78%,
+    rgba(2, 52, 54, 0.12) 100%);
+}
+.hero-video-caption {
+  position: absolute;
+  left: var(--space-3);
+  bottom: var(--space-3);
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: var(--space-4);
+  gap: 8px;
+  padding: 9px 15px;
+  border-radius: var(--radius-md);
+  background: rgba(248, 246, 241, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 2px 12px rgba(2, 52, 54, 0.10);
   font-family: var(--font-sans);
-  font-size: 13px;
-  color: var(--slate-blue);
-  font-style: italic;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--slate-deep);
 }
+.hero-video-caption .stars { color: var(--clay, #c2613f); font-size: 13px; letter-spacing: 1px; line-height: 1; }
 
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; gap: var(--space-5); }
-  .hero-visual { aspect-ratio: 4/3; }
+  .hero-visual { aspect-ratio: 16/10; max-height: 460px; }
 }
 
 /* HERO STATS STRIP */
@@ -3217,49 +3257,12 @@ body.no-scroll { overflow: hidden; }
 }
 
 /* -------------------------------------------------------------
-   HERO - full-bleed eye video (larger + slower, like femgevityhealth.com)
-   The two-column ".hero / .hero-grid / .hero-visual" rules above
-   remain as a fallback; ".hero--video" overrides for the full-bleed look.
+   HERO - mobile CTA stacking (contained framed video lives in the
+   base ".hero / .hero-grid / .hero-visual" rules above).
    ------------------------------------------------------------- */
-.hero--video {
-  position: relative;
-  padding: var(--space-8) 0;
-  min-height: 62vh;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  background: var(--slate-blue);
-}
-.hero-bg-video {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; object-position: right center; display: block; z-index: 0;
-}
-.hero-scrim {
-  position: absolute; inset: 0; z-index: 1;
-  /* Left-to-right gradient: dark behind the text (left) so the white headline
-     stays legible, clearing toward the right so the eye footage shows. Note
-     hero-eye.mov is a watermarked Adobe Stock comp - a faint "Adobe Stock"
-     mark may show on the right until a licensed, watermark-free file replaces
-     the asset (then this can stay as-is). */
-  background: linear-gradient(90deg, rgba(2,52,54,0.94) 0%, rgba(2,52,54,0.86) 32%, rgba(2,52,54,0.45) 64%, rgba(2,52,54,0.20) 100%);
-}
-.hero--video .container { position: relative; z-index: 2; }
-.hero--video .hero-content { max-width: 660px; }
-.hero--video .eyebrow { color: var(--surf-green); }
-.hero--video .eyebrow::before { background: var(--surf-green); }
-.hero--video .hero-identity { color: #fff; border-left-color: var(--surf-green); }
-.hero--video h1 { color: #fff; }
-.hero--video .hero-sub { color: rgba(255,255,255,0.88); max-width: 600px; }
-.hero--video .hero-sub strong { color: #fff; }
-@media (max-width: 900px) {
-  .hero--video { min-height: 0; padding: var(--space-7) 0; }
-  /* On phones text sits over the whole frame, so keep it darker at top
-     (behind the headline) and let the eye show lower down. */
-  .hero-scrim { background: linear-gradient(180deg, rgba(2,52,54,0.86) 0%, rgba(2,52,54,0.72) 60%, rgba(2,52,54,0.5) 100%); }
-}
 @media (max-width: 600px) {
-  .hero--video .hero-ctas { flex-direction: column; align-items: stretch; gap: 12px; }
-  .hero--video .hero-ctas .btn { width: 100%; justify-content: center; }
+  .hero-ctas { flex-direction: column; align-items: stretch; gap: 12px; }
+  .hero-ctas .btn { width: 100%; justify-content: center; }
 }
 
 /* -------------------------------------------------------------
@@ -3431,27 +3434,35 @@ body.no-scroll { overflow: hidden; }
      Content sits over an emerald gradient scrim for legibility. The previous
      two-column treatment is preserved in CSS comments under ".hero (two-column
      fallback)" if a revert is ever wanted. -->
-<section class="hero hero--video">
-  <video
-    class="hero-bg-video"
-    src="assets/video/hero-eye.mov"
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="auto"
-    aria-hidden="true"
-  ></video>
-  <div class="hero-scrim" aria-hidden="true"></div>
+<section class="hero">
   <div class="container">
-    <div class="hero-content reveal">
-      <span class="eyebrow">A Collaborative Care Platform for Women's Health</span>
-      <span class="hero-identity">We are a clinical care provider — not a wellness vendor.</span>
-      <h1>Precision women's health, built for the physician&ndash;patient relationship.</h1>
-      <p class="hero-sub">FemGevity adds precision menopause and longevity care to the practices already serving women — delivered through <strong>your existing reimbursement channels</strong>, not a cash-pay subscription.</p>
-      <div class="hero-ctas">
-        <a href="#partnership" class="btn btn-on-dark">Book a 30-min Partnership Call <span class="arrow">→</span></a>
-        <a href="#science" class="btn btn-ghost-on-dark">See the Care Model</a>
+    <div class="hero-grid">
+      <div class="hero-content reveal">
+        <span class="eyebrow">A Collaborative Care Platform for Women's Health</span>
+        <span class="hero-identity">We are a clinical care provider — not a wellness vendor.</span>
+        <h1>Precision women's health, built for the physician&ndash;patient relationship.</h1>
+        <p class="hero-sub">FemGevity adds precision menopause and longevity care to the practices already serving women — delivered through <strong>your existing reimbursement channels</strong>, not a cash-pay subscription.</p>
+        <div class="hero-ctas">
+          <a href="#partnership" class="btn btn-primary">Book a 30-min Partnership Call <span class="arrow">→</span></a>
+          <a href="#science" class="btn btn-secondary">See the Care Model</a>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <video
+          class="hero-video"
+          src="assets/video/hero-femgevity.mov"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+          aria-hidden="true"
+        ></video>
+        <div class="hero-video-overlay" aria-hidden="true"></div>
+        <div class="hero-video-caption">
+          <span class="stars">★★★★★</span>
+          <span>5.0 from 500+ women</span>
+        </div>
       </div>
     </div>
   </div>
@@ -4791,10 +4802,10 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   window.matchMedia('(min-width: 901px)').addEventListener('change', (e) => { if (e.matches) setOpen(false); });
 })();
 
-// Hero eye video - slower + larger per founder (like femgevityhealth.com).
-// 0.25x = calm/meditative. Tweak between 0.2 and 1.0 to taste.
-const HERO_VIDEO_RATE = 0.25;
-const heroVideo = document.querySelector('.hero-bg-video');
+// Hero video - gentle slow-motion for a calm, premium feel (founder liked
+// the slower pace). 0.5x ~ natural; lower = dreamier. Tweak 0.25-1.0 to taste.
+const HERO_VIDEO_RATE = 0.5;
+const heroVideo = document.querySelector('.hero-video');
 if (heroVideo) {
   const applyRate = () => { heroVideo.playbackRate = HERO_VIDEO_RATE; };
   heroVideo.addEventListener('loadedmetadata', applyRate);
