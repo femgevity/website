@@ -1,0 +1,16 @@
+Hero: full-width framed banner to match femgevityhealth.com size
+
+Match the existing consumer-site hero: a large video banner that spans
+the container (inset with white space, 20px rounded corners, soft
+shadow) with the headline, sub, CTAs and rating overlaid on the
+darker-left, footage clear on the right.
+
+- Replaces the smaller two-column portrait card with .hero-banner
+- Left-to-right wash (darker behind text, transparent on the right) -
+  lighter than a full cinematic scrim, mirrors the reference
+- On-dark headline/CTAs (btn-on-dark / btn-ghost-on-dark)
+- Mobile: top-to-bottom wash + 70vh banner so the headline stays legible
+- Measured to ~20px radius / container-width, matching the live site
+
+NOTE: still the watermarked Adobe Stock preview clip; the mark shows in
+the lighter center. Drop the licensed file at the same path to clear it.

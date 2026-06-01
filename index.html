@@ -721,59 +721,25 @@ section {
    HERO
    ============================================================= */
 .hero {
-  padding: var(--space-7) 0 var(--space-7);
+  padding: var(--space-4) 0 var(--space-5);
   background: var(--spring-white);
 }
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: var(--space-7);
-  align-items: center;
-}
 
-.hero-identity {
-  display: inline-block;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 17px;
-  color: var(--slate-blue);
-  margin-bottom: var(--space-3);
-  padding-left: var(--space-2);
-  border-left: 2px solid var(--surf-green);
-}
-
-.hero h1 { margin-bottom: var(--space-3); }
-
-.hero-sub {
-  font-family: var(--font-sans);
-  font-size: 19px;
-  line-height: 1.55;
-  color: var(--ink-muted);
-  max-width: 560px;
-  margin-bottom: var(--space-5);
-}
-.hero-sub strong {
-  color: var(--slate-blue);
-  font-weight: 600;
-}
-
-.hero-ctas {
-  display: flex;
-  gap: var(--space-2);
-  flex-wrap: wrap;
-}
-
-/* Contained, framed hero media — matches femgevityhealth.com:
-   a large rounded card inset in a light page, soft drop shadow,
-   light overlay (not a dark cinematic wash). */
-.hero-visual {
+/* Full-width framed hero banner — matches femgevityhealth.com:
+   a large rounded video that spans the container, inset from the page
+   edges with white space around it, headline + CTAs overlaid on the
+   darker left side, footage clear on the right. */
+.hero-banner {
   position: relative;
-  aspect-ratio: 4/5;
-  background: var(--slate-blue);
-  overflow: hidden;
+  width: 100%;
+  min-height: clamp(540px, 64vw, 760px);
   border-radius: var(--radius-xl);
-  box-shadow: 0 20px 60px -20px rgba(2, 52, 54, 0.18),
-              0 8px 20px -8px rgba(2, 52, 54, 0.12);
+  overflow: hidden;
+  background: var(--slate-blue);
+  display: flex;
+  align-items: center;
+  box-shadow: 0 24px 70px -24px rgba(2, 52, 54, 0.22),
+              0 10px 24px -10px rgba(2, 52, 54, 0.14);
 }
 .hero-video {
   position: absolute;
@@ -782,45 +748,85 @@ section {
   height: 100%;
   object-fit: cover;
   display: block;
-  border-radius: var(--radius-xl);
+  z-index: 0;
 }
-/* Light overlay: keeps the caption legible at the bottom edge only,
-   leaving the rest of the footage bright and clear. */
-.hero-video-overlay {
+/* Left-to-right wash: enough behind the headline for legibility,
+   clearing to fully transparent on the right so the footage stays bright.
+   Lighter than a full cinematic scrim — mirrors the existing site. */
+.hero-banner-overlay {
   position: absolute;
   inset: 0;
-  border-radius: var(--radius-xl);
+  z-index: 1;
   pointer-events: none;
-  background: linear-gradient(180deg,
-    rgba(248, 246, 241, 0.04) 0%,
-    transparent 22%,
-    transparent 78%,
-    rgba(2, 52, 54, 0.12) 100%);
+  background: linear-gradient(90deg,
+    rgba(2, 52, 54, 0.82) 0%,
+    rgba(2, 52, 54, 0.66) 28%,
+    rgba(2, 52, 54, 0.34) 52%,
+    rgba(2, 52, 54, 0.08) 78%,
+    rgba(2, 52, 54, 0) 100%);
 }
-.hero-video-caption {
-  position: absolute;
-  left: var(--space-3);
-  bottom: var(--space-3);
+.hero-banner-content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  padding: var(--space-6) var(--space-6);
+}
+.hero-banner-content .eyebrow,
+.hero-banner-content .eyebrow::before { color: var(--surf-green); }
+.hero-banner-content .eyebrow::before { background: var(--surf-green); }
+.hero-identity {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 17px;
+  color: #fff;
+  margin-bottom: var(--space-3);
+  padding-left: var(--space-2);
+  border-left: 2px solid var(--surf-green);
+}
+.hero-banner-content h1 { color: #fff; margin-bottom: var(--space-3); }
+.hero-sub {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 520px;
+  margin-bottom: var(--space-4);
+}
+.hero-sub strong { color: #fff; font-weight: 600; }
+.hero-ctas {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+.hero-rating {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 9px 15px;
-  border-radius: var(--radius-md);
-  background: rgba(248, 246, 241, 0.94);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 2px 12px rgba(2, 52, 54, 0.10);
+  gap: 10px;
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.03em;
-  color: var(--slate-deep);
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.92);
 }
-.hero-video-caption .stars { color: var(--clay, #c2613f); font-size: 13px; letter-spacing: 1px; line-height: 1; }
+.hero-rating .stars { color: var(--clay, #c2613f); font-size: 15px; letter-spacing: 2px; line-height: 1; }
 
 @media (max-width: 900px) {
-  .hero-grid { grid-template-columns: 1fr; gap: var(--space-5); }
-  .hero-visual { aspect-ratio: 16/10; max-height: 460px; }
+  .hero-banner { min-height: 70vh; align-items: center; }
+  .hero-banner-content { padding: var(--space-5) var(--space-4); }
+  /* On phones the left-to-right wash can't sit behind a narrow column,
+     so use a top-to-bottom wash that keeps the headline legible. */
+  .hero-banner-overlay {
+    background: linear-gradient(180deg,
+      rgba(2, 52, 54, 0.74) 0%,
+      rgba(2, 52, 54, 0.58) 55%,
+      rgba(2, 52, 54, 0.42) 100%);
+  }
+}
+@media (max-width: 600px) {
+  .hero-ctas { flex-direction: column; align-items: stretch; }
+  .hero-ctas .btn { width: 100%; justify-content: center; }
 }
 
 /* HERO STATS STRIP */
@@ -3436,30 +3442,28 @@ body.no-scroll { overflow: hidden; }
      fallback)" if a revert is ever wanted. -->
 <section class="hero">
   <div class="container">
-    <div class="hero-grid">
-      <div class="hero-content reveal">
+    <div class="hero-banner reveal">
+      <video
+        class="hero-video"
+        src="assets/video/hero-femgevity.mov"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        aria-hidden="true"
+      ></video>
+      <div class="hero-banner-overlay" aria-hidden="true"></div>
+      <div class="hero-banner-content">
         <span class="eyebrow">A Collaborative Care Platform for Women's Health</span>
         <span class="hero-identity">We are a clinical care provider — not a wellness vendor.</span>
         <h1>Precision women's health, built for the physician&ndash;patient relationship.</h1>
         <p class="hero-sub">FemGevity adds precision menopause and longevity care to the practices already serving women — delivered through <strong>your existing reimbursement channels</strong>, not a cash-pay subscription.</p>
         <div class="hero-ctas">
-          <a href="#partnership" class="btn btn-primary">Book a 30-min Partnership Call <span class="arrow">→</span></a>
-          <a href="#science" class="btn btn-secondary">See the Care Model</a>
+          <a href="#partnership" class="btn btn-on-dark">Book a 30-min Partnership Call <span class="arrow">→</span></a>
+          <a href="#science" class="btn btn-ghost-on-dark">See the Care Model</a>
         </div>
-      </div>
-      <div class="hero-visual reveal">
-        <video
-          class="hero-video"
-          src="assets/video/hero-femgevity.mov"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="auto"
-          aria-hidden="true"
-        ></video>
-        <div class="hero-video-overlay" aria-hidden="true"></div>
-        <div class="hero-video-caption">
+        <div class="hero-rating">
           <span class="stars">★★★★★</span>
           <span>5.0 from 500+ women</span>
         </div>
