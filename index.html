@@ -3162,8 +3162,9 @@ section {
    ============================================================= */
 
 /* Real SVG logo replaces the mockup's text logo */
-.logo { display: inline-flex; align-items: center; line-height: 0; }
-.logo img { height: 28px; width: auto; display: block; }
+.logo { display: inline-flex; align-items: center; line-height: 0; flex-shrink: 0; }
+.logo img { height: 30px; width: auto; display: block; }
+.nav-actions { flex-shrink: 0; }
 @media (max-width: 600px) { .logo img { height: 24px; } }
 .footer-brand .logo { margin-bottom: var(--space-2); }
 .footer-brand .logo img { height: 32px; }
