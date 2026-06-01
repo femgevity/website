@@ -649,7 +649,9 @@ section {
 }
 .nav-links {
   display: flex;
-  gap: var(--space-4);
+  flex: 1;
+  justify-content: center;
+  gap: var(--space-5);
   list-style: none;
   font-family: var(--font-sans);
   font-size: 13px;
@@ -676,6 +678,7 @@ section {
   text-transform: uppercase;
   color: rgba(255,255,255,0.7);
   transition: color 0.2s ease;
+  white-space: nowrap;
 }
 .nav-patient-link:hover { color: var(--white); }
 .nav-patient-link span { transition: transform 0.2s ease; display: inline-block; }
@@ -684,13 +687,15 @@ section {
 .nav-cta {
   background: var(--white);
   color: var(--slate-blue);
-  padding: 12px 22px;
+  padding: 13px 26px;
+  border-radius: 100px;
   font-family: var(--font-sans);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   transition: all 0.25s ease;
+  white-space: nowrap;
 }
 .nav-cta:hover {
   background: var(--surf-green);
